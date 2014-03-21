@@ -1,15 +1,9 @@
-#include <graphics.h>
-#include <iostream>
+#include "Game.hpp"
 using namespace std;
 
 // Still doing hello world; let's change it, guys.
 int main()
 {
-	int gd = DETECT, gm = 0;
-	initgraph( &gd, &gm, "" );
-	
-	cout << "Hello World!" << endl;
-	while ( !anykeypressed() ) { }
-	
-	closegraph();
+	Game g;
+	g.Run();
 }

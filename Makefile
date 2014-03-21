@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -m32 -std=c++11 -Wall -Iopenbgi
 
-OBJS = Main.o
+OBJS = Main.o Game.o
 
 rohmen: lib/libopenbgi.a $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o rohmen -O2 -Llib -lopenbgi -lgdi32
