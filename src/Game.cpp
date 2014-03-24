@@ -1,7 +1,5 @@
 #include "Game.hpp"
 #include <graphics.h>
-#include <iostream>
-#include <ctime>
 using namespace std;
 
 Game::Game() {
@@ -11,48 +9,49 @@ Game::Game() {
 Game::~Game() {
 }
 
+void Game::HandleInput() {
+
+	// -- insert any handle input here
+	
+}
+
+void Game::Update() {
+
+	// -- insert any update here
+	
+}
+
 const bool Game::IsExit() const {
 	return exit;
 }
 
-void Game::SetExit( const bool e ) {
-	exit = e;
+void Game::SetExit( const bool exit ) {
+	this->exit = exit;
 }
-
-void Game::HandleInput() {
-	cout << "Input" << endl;
-}
-
-void Game::Update() {
-	cout << "Update" << endl;
-}
-
+		
 void Game::Draw() {
-	cleardevice();
-	for ( int i = 0; i < 16; i++ ) {
-		setcolor( i );
-		rectangle( i, 0, i + 1, getmaxy() );
+	// begin drawing
+	canvas.BeginDraw();
+	
+	// -- insert any drawing here
+	for ( int i = 0; i < getmaxx(); i++ ) {
+		for ( int j = 0; j < getmaxy(); j++ ) {
+			putpixel( i, j, i % 16 );
+		}
 	}
+	
+	// end drawing
+	canvas.EndDraw();
 }
 
 void Game::Run() {
-	int gd = DETECT, gm = 0;
-	initgraph( &gd, &gm, "" );
-	
 	while ( !IsExit() ) {
-	
-		clock_t clkstart = clock();
-	
+		
 		HandleInput();
 		Update();
 		Draw();
 		
-		clock_t clkend = clock();
-		
-		// sleep for (1000 / 30) ms - time spent for loop methods
-		int elapsedTimeMilis = (int)( ( clkend - clkstart ) / ( CLOCKS_PER_SEC / 1000 ) );
-		delay( (1000 / 30)  - elapsedTimeMilis );
+		// sleep to make game run at 30 FPS
+		delay( 1000 / 30 );
 	}
-	
-	closegraph();
 }

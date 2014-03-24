@@ -1,6 +1,8 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#include "Canvas.hpp"
+
 // the main game object
 class Game {
 
@@ -8,10 +10,6 @@ class Game {
 		// ctor-dtor
 		Game();
 		~Game();
-		
-		// to exit from the game
-		const bool IsExit() const;
-		void SetExit( const bool );
 		
 		// game loop methods
 		void HandleInput();
@@ -21,9 +19,17 @@ class Game {
 		// main game function
 		void Run();
 		
-	private:
+		// to exit from the game
+		inline const bool IsExit() const;
+		inline void SetExit( const bool exit );
+		
+	protected:
+		// make the object non-copyable
 		Game( const Game& );
 		Game& operator = ( const Game& );
+		
+	private:
+		Canvas canvas;
 		
 		bool exit;
 };
