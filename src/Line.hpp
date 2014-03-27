@@ -21,10 +21,12 @@ class Line: public Stroke {
 		void rotate(double,Point);
 		void reflect(double, Point);
 		void shear(double, double, Point);
+		void fxpoints(int);
 		
 	private:
 		Point start_point;
 		Point end_point;
+		double points[4];
 		int color;
 };
 #endif

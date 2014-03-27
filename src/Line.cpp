@@ -126,27 +126,43 @@ void Line::draw(){
 
 }
 
-void Line::translate(double dx, double dy){
-	int points[4];
-	points[0] = start_point.x;
-	points[1] = start_point.y;
-	points[2] = end_point.x;
-	points[3] = end_point.y;
+void Line::translate(double dx, double dy){ //dx = perpindahan titik x, dy = perpindahan titik y
+	fxpoints(0);
 	translation(points, 2, dx, dy);
-	start_point.x = points[0];
-	start_point.y = points[1];
-	end_point.x   = points[2];
-	end_point.y   = points[3];
+	fxpoints(1);
 }
 
-void Line::scale(double, Point){
+void Line::scale(double sc, Point P){ //sc = skala, P = titik pusat skala
+	fxpoints(0);
+	scale(points, 2, sc, sc, P.x, P.y);
+	fxpoints(1);
 }
 
-void Line::rotate(double,Point){
+void Line::rotate(double angle, Point P){ //angle = derajat putaran, P = titik pusat rotasi
+	fxpoints(0);
+	rotate(points, 2, angle, P.x, P.y);
+	fxpoints(1);
 }
 
-void Line::reflect(double, Point){
+void Line::reflect(double, Point){ //belum dikerjain krn pilihan di transformation.cpp baru reflect by x-axis, y-axis, & y = x
+	/* fxpoints(0);
+	reflect(points, 2, int option);
+	fxpoints(1); */
 }
 
 void Line::shear(double, double, Point){
+}
+
+void Line::fxpoints(int choice){ //untuk mengisi array points dgn nilai
+	if (choice = 0){ //isi array dgn nilai point (fill)
+		points[0] = start_point.x;
+		points[1] = start_point.y;
+		points[2] = end_point.x;
+		points[3] = end_point.y;
+	} else if choice = 1){ //isi point dgn nilai dari array (extract)
+		start_point.x = points[0];
+		start_point.y = points[1];
+		end_point.x   = points[2];
+		end_point.y   = points[3];
+	}
 }
