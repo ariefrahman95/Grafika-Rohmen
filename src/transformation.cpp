@@ -3,7 +3,7 @@
 #include<stdio.h>
 #include<conio.h>
 
-void translation(int points[], int edges, int dx, int dy) {
+void translation(double points[], int edges, double dx, double dy) {
 	int i; // Iterator
 	for(i = 0; i < edges; i++) {
 		points[2*i] += dx;
