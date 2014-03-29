@@ -1,5 +1,7 @@
 #include "Game.hpp"
 #include <graphics.h>
+#include <iostream>
+#include <Windows.h>
 using namespace std;
 
 Game::Game() {
@@ -12,7 +14,11 @@ Game::~Game() {
 void Game::HandleInput() {
 
 	// -- insert any handle input here
-	
+	if (GetAsyncKeyState(VK_ESCAPE)) {
+		cout << "Keluar deh..." << endl;
+	} else {
+		cout << "1";
+	}
 }
 
 void Game::Update() {

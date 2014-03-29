@@ -32,6 +32,8 @@ class Game {
 		Canvas canvas;
 		
 		bool exit;
+		
+		
 };
 
 #endif
