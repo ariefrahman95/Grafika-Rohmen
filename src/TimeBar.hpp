@@ -13,6 +13,8 @@ class TimeBar: public Drawable {
 	
 		void Update();
 		void Draw(Canvas&);
+		
+		bool IsTimeUp();
 
 	protected:
 		TimeBar(const TimeBar&);
@@ -26,6 +28,8 @@ class TimeBar: public Drawable {
 		
 		int color_fill;
 		int color_border;
+		
+		bool isTimeUp;
 		
 		int counter;
 };

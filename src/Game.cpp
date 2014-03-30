@@ -5,7 +5,7 @@
 using namespace std;
 
 Game::Game() {
-	isBegun = false;
+	isPlaying = false;
 	exit = false;
 }
 
@@ -14,20 +14,23 @@ Game::~Game() {
 
 void Game::HandleInput() {
 	if (keypressed(KEY_LEFT)) {
-		if (!isBegun) {
-			isBegun = true;
+		if (!isPlaying) {
+			isPlaying = true;
 		}
 	}
 	if (keypressed(KEY_RIGHT)) {
-		if (!isBegun) {
-			isBegun = true;
+		if (!isPlaying) {
+			isPlaying = true;
 		}
 	}
 }
 
 void Game::Update() {
-	if (isBegun) {
+	if (isPlaying) {
 		timeBar.Update();
+		if (timeBar.IsTimeUp()) {
+			isPlaying = false;
+		}
 	}
 }
 
