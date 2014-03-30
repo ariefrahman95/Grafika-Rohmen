@@ -2,8 +2,6 @@
 #include <math.h>
 
 Line::Line(){
-	P0 = Point();
-	P1 = Point();
 	color = 0;
 }
 
@@ -53,11 +51,17 @@ void Line::Rotate(double angle, const Point P){ //angle = derajat putaran (dalam
 	double s = sin(angle * 3.14159265/180);
 	double c = cos(angle * 3.14159265/180);
 	
-	P0.x = P0.x * c - P0.y * s;
-	P0.y = P0.x * s + P0.y * c;
+	double x = P0.x;
+	double y = P0.y;
 	
-	P1.x = P1.x * c - P1.y * s;
-	P1.y = P1.x * s + P1.y * c;
+	P0.x = x * c - y * s;
+	P0.y = x * s + y * c;
+	
+	x = P1.x;
+	y = P1.y;
+	
+	P1.x = x * c - y * s;
+	P1.y = x * s + y * c;
 	
 	P0 += P;
 	P1 += P;

@@ -4,7 +4,6 @@
 #include "Canvas.hpp"
 #include "Drawable.hpp"
 #include "Point.hpp"
-#include "Stroke.hpp"
 #include <vector>
 
 class TimeBar: public Drawable {
@@ -20,8 +19,10 @@ class TimeBar: public Drawable {
 		TimeBar& operator=(const TimeBar&);
 	
 	private:
+		std::vector<Line> lines;
+		std::vector<Circle> circles;
+		
 		Point position;
-		std::vector<Line> strokes;
 		
 		int color_fill;
 		int color_border;

@@ -10,6 +10,8 @@ class Stroke {
 		virtual void Translate(double, double) = 0;
 		virtual void Scale(double, Point) = 0;
 		virtual void Rotate(double,Point) = 0;
+		
+	
 };
 
 #endif

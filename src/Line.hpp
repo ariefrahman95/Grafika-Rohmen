@@ -2,9 +2,8 @@
 #define LINE_HPP
 
 #include "Point.hpp"
-#include "Stroke.hpp"
 
-class Line: public Stroke {
+class Line {
 	public:
 		// ctor-dtor-cctor
 		Line();

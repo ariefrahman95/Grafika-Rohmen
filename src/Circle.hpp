@@ -1,28 +1,25 @@
 #ifndef CIRCLE_HPP
 #define CIRCLE_HPP
 
-#include "Stroke.hpp"
+#include "Point.hpp"
 
-class Circle: public Stroke {
+class Circle {
 	public:
 		// ctor-dtor-cctor
 		Circle();
-		Circle(Point, double);
+		Circle(Point, double, int);
 		~Circle();
 		Circle(const Circle&);
 		Circle& operator=(const Circle&);
 		
 		//method
-		void draw();
-		void translate(double, double);
-		void scale(double, Point);
-		void rotate(double,Point);
-		void reflect(double, Point);
-		void shear(double, double, Point);
-		
-	private:
-		Point center_point;
-		double radius;
+		void Translate(double, double);
+		void Scale(double, const Point);
+		void Rotate(double, const Point);
+
+		Point C;
+		double R;
 		int color;
 };
+
 #endif

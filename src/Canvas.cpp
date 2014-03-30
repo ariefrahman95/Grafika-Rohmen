@@ -15,6 +15,7 @@ Canvas::~Canvas() {
 void Canvas::BeginDraw() {
 	drawing = true;
 	setactivepage( InactivePage() );
+	cleardevice();
 }
 
 void Canvas::EndDraw() {
@@ -24,6 +25,26 @@ void Canvas::EndDraw() {
 }
 
 void Canvas::DrawLine(Line line, int color) { // Algoritma line bresenham
+	// KASUS I: Kalo garis hor/ver langsung ajah, ngapain ribet2
+	if (line.P0.x == line.P1.x) { // hor
+		int start = (line.P0.y < line.P1.y) ? line.P0.y : line.P1.y;
+		int end = (line.P0.y > line.P1.y) ? line.P0.y : line.P1.y;
+		for (int i = start; i <= end; i++) {
+			putpixel(line.P0.x, i, color);
+		}
+		return;
+	}
+	
+	if (line.P0.y == line.P1.y) { //  ver
+		int start = (line.P0.x < line.P1.x) ? line.P0.x : line.P1.x;
+		int end = (line.P0.x > line.P1.x) ? line.P0.x : line.P1.x;
+		for (int i = start; i <= end; i++) {
+			putpixel(i, line.P0.y, color);
+		}
+		return;
+	}
+	
+	// KASUS II: Miring garisnya, mau ga mau ya mau
 	int m; // mode iterasi: 0-iterasi pada x (normal); 1-iterasi pada y
 
 	// algoritma preinisiasi
@@ -80,7 +101,7 @@ void Canvas::DrawLine(Line line, int color) { // Algoritma line bresenham
 	}
 	
 	// iterasi pixel
-	for (x = line.P0.x + 1; x < line.P1.x; x++) {
+	for (x = line.P0.x + 1; x <= line.P1.x; x++) {
 		// menentukan nilai p selanjutnya
 		if (p < 0) { // nilai y selanjutnya sama dengan y sekarang
 			p += c0;

@@ -33,7 +33,7 @@ void Game::Draw() {
 	
 	timeBar.Draw(canvas);
 	
-	/*// -- insert any drawing here
+	/*// drawing testing by Tito
 	for ( int i = 0; i < getmaxx(); i++ ) {
 		for ( int j = 0; j < getmaxy(); j++ ) {
 			putpixel( i, j, i % 16 );
