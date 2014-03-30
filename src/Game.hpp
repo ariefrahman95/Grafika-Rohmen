@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include "Canvas.hpp"
+#include "TimeBar.hpp"
 
 // the main game object
 class Game {
@@ -33,7 +34,7 @@ class Game {
 		
 		bool exit;
 		
-		
+		TimeBar timeBar;
 };
 
 #endif

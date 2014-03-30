@@ -1,7 +1,14 @@
 #ifndef CANVAS_HPP
 #define CANVAS_HPP
 
+#include "Circle.hpp"
 #include <graphics.h>
+#include "Line.hpp"
+#include "Point.hpp"
+
+#define CENTERX ((getmaxx()+1)/2)
+#define CENTERY ((getmaxy()+1)/2)
+#define ABS(X) ((X < 0) ? -X : X)
 
 // provides window and drawing methods
 class Canvas {
@@ -14,6 +21,11 @@ class Canvas {
 		// any drawing method has to be inside BeginDraw and EndDraw
 		void BeginDraw();
 		void EndDraw();
+		
+		void DrawLine(Line, int);
+		//void DrawCircle(Circle, int);
+		void Fill(Point, int);
+		void FillFlood(Point, int, int); // only small area
 		
 	protected:
 		// make the object non-copyable

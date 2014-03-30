@@ -1,9 +1,8 @@
 #ifndef LINE_HPP
 #define LINE_HPP
 
+#include "Point.hpp"
 #include "Stroke.hpp"
-#define CENTERX			( ( getmaxx() + 1 ) / 2 )
-#define CENTERY			( ( getmaxy() + 1 ) / 2 )
 
 class Line: public Stroke {
 	public:
@@ -15,18 +14,12 @@ class Line: public Stroke {
 		Line& operator=(const Line&);
 		
 		//method
-		void draw();
-		void translate(double, double);
-		void scale(double, Point);
-		void rotate(double,Point);
-		void reflect(double, Point);
-		void shear(double, double, Point);
-		void fxpoints(int);
+		void Translate(double, double);
+		void Scale(double, const Point);
+		void Rotate(double, const Point);
 		
-	private:
-		Point start_point;
-		Point end_point;
-		double points[4];
+		Point P0;
+		Point P1;
 		int color;
 };
 #endif

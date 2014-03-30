@@ -1,16 +1,15 @@
 #include "Line.hpp"
-#include "transformation.hpp"
-
+#include <math.h>
 
 Line::Line(){
-	start_point = Point();
-	end_point = Point();
+	P0 = Point();
+	P1 = Point();
 	color = 0;
 }
 
-Line::Line(Point P1, Point P2, int C){
-	start_point = P1;
-	end_point = P2;
+Line::Line(Point P0, Point P1, int C){
+	this->P0 = P0;
+	this->P1 = P1;
 	color = C; //warna
 }
 
@@ -18,151 +17,48 @@ Line::~Line(){
 }
 
 Line::Line(const Line& L){
-	start_point = L.start_point;
-	end_point = L.end_point;
+	P0 = L.P0;
+	P1 = L.P1;
 	color = L.color;
 }
 
 Line& Line::operator=(const Line& L){
-	start_point = L.start_point;
-	end_point = L.end_point;
+	P0 = L.P0;
+	P1 = L.P1;
 	color = L.color;
 	return *this;
 }
 
+void Line::Translate(double dx, double dy){ //dx = perpindahan titik x, dy = perpindahan titik y
+	const Point P = Point(dx,dy);
+	P0 += P;
+	P1 += P;
+}
 
-void Line::draw(){
-
-	int x0 = CENTERX;
-	int y0 = CENTERY;
+void Line::Scale(double sc, const Point P){ //sc = skala, P = titik pusat skala
+	P0 -= P;
+	P1 -= P;
 	
-	//Algoritma line bresenham
-	// deklarasi variabel
-	double temp; // variabel sementara untuk penyimpanan saat swaping
-	double dx, dy; // selisih nilai start_point.x dg end_point.x dan start_point.y dg end_point.y
-	int p; // parameter function
-	int c0, c1; // konstanta parameter function
-	int x, y; // untuk iterasi pixel
-	int state; // 0:menyatakan iterasi pada x (normal), 1:menyatakan iterasi pada y
-
-	// preinisiasi
-	dx = end_point.x-start_point.x;
-	dy = end_point.y-start_point.y;
-
-	// algoritma
-	if (abs(dx) < abs(dy)) { // garis menanjak (abs(m) > 1), iterasi pada y
-		state = 1;
-		
-		// pertukarkan nilai x dengan y
-		temp = start_point.x;
-		start_point.x = start_point.y;
-		start_point.y = temp;
-		
-		temp = end_point.x;
-		end_point.x = end_point.y;
-		end_point.y = temp;
-	} else { // garis melandai (0 < abs(m) <= 1), iterasi pada x
-		state = 0;
-	}
-
-	// memastikan start_point.x < end_point.x
-	if (start_point.x > end_point.x) {
-		temp = start_point.x;
-		start_point.x = end_point.x;
-		end_point.x = temp;
-
-		temp = start_point.y;
-		start_point.y = end_point.y;
-		end_point.y = temp;
-	}
+	P0 *= sc;
+	P1 *= sc;
 	
-	// inisiasi
-	dx = end_point.x-start_point.x;
-	dy = end_point.y-start_point.y;
+	P0 += P;
+	P1 += P;
+}
+
+void Line::Rotate(double angle, const Point P){ //angle = derajat putaran (dalam derajat), P = titik pusat rotasi
+	P0 -= P;
+	P1 -= P;
 	
-	p = 2*dy-dx;
-	c0 = 2*dy;
-	c1 = 2*(dy-dx);
-	if (dy < 0) {
-		p *= -1;
-		c0 *= -1;
-		c1 = -2*(dy+dx);
-	}
+	double s = sin(angle * 3.14159265/180);
+	double c = cos(angle * 3.14159265/180);
 	
-	// inisiasi pixel
-	x = start_point.x;
-	y = start_point.y;
+	P0.x = P0.x * c - P0.y * s;
+	P0.y = P0.x * s + P0.y * c;
 	
-	if (state) {
-		//putpixel(y+x0, -x+y0, color);
-		canvas_putpixel(y+x0, -x+y0, color);
-	} else {
-		//putpixel(x+x0, -y+y0, color);
-		canvas_putpixel(x+x0, -y+y0, color);
-	}
+	P1.x = P1.x * c - P1.y * s;
+	P1.y = P1.x * s + P1.y * c;
 	
-	// iterasi pixel
-	for (x = start_point.x+1; x < end_point.x; x++) {
-		// menentukan nilai p selanjutnya
-		if (p < 0) { // nilai y selanjutnya sama dengan y sekarang
-			p += c0;
-		} else { // nilai y selanjutnya lebih/kurang 1 dari y sekarang
-			p += c1;
-			if (dy < 0) {
-				y--;
-			} else {
-				y++;
-			}
-		}
-		
-		if (state) {
-			//putpixel(y+x0, -x+y0, color);
-		} else {
-			//putpixel(x+x0, -y+y0, color);
-			canvas_putpixel(x+x0, -y+y0, color);
-		}
-	}
-}
-
-}
-
-void Line::translate(double dx, double dy){ //dx = perpindahan titik x, dy = perpindahan titik y
-	fxpoints(0);
-	translation(points, 2, dx, dy);
-	fxpoints(1);
-}
-
-void Line::scale(double sc, Point P){ //sc = skala, P = titik pusat skala
-	fxpoints(0);
-	scale(points, 2, sc, sc, P.x, P.y);
-	fxpoints(1);
-}
-
-void Line::rotate(double angle, Point P){ //angle = derajat putaran, P = titik pusat rotasi
-	fxpoints(0);
-	rotate(points, 2, angle, P.x, P.y);
-	fxpoints(1);
-}
-
-void Line::reflect(double, Point){ //belum dikerjain krn pilihan di transformation.cpp baru reflect by x-axis, y-axis, & y = x
-	/* fxpoints(0);
-	reflect(points, 2, int option);
-	fxpoints(1); */
-}
-
-void Line::shear(double, double, Point){
-}
-
-void Line::fxpoints(int choice){ //untuk mengisi array points dgn nilai
-	if (choice = 0){ //isi array dgn nilai point (fill)
-		points[0] = start_point.x;
-		points[1] = start_point.y;
-		points[2] = end_point.x;
-		points[3] = end_point.y;
-	} else if choice = 1){ //isi point dgn nilai dari array (extract)
-		start_point.x = points[0];
-		start_point.y = points[1];
-		end_point.x   = points[2];
-		end_point.y   = points[3];
-	}
+	P0 += P;
+	P1 += P;
 }

@@ -4,12 +4,22 @@
 class Point {
 
 	public:
+		Point();
+		Point(double, double);
+		~Point();
+		Point(const Point&);
+		Point& operator=(const Point&);
+		
+		Point& operator+=(const Point&);
+		Point& operator-=(const Point&);
+		Point& operator*=(const double);
+		
 		// swap x-y or y-x
 		void Swap();
 		
 		// public variables
-		float x;
-		float y;
+		double x;
+		double y;
 };
 
 #endif

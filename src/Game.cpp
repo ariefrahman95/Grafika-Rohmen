@@ -12,19 +12,11 @@ Game::~Game() {
 }
 
 void Game::HandleInput() {
-
-	// -- insert any handle input here
-	if (GetAsyncKeyState(VK_ESCAPE)) {
-		cout << "Keluar deh..." << endl;
-	} else {
-		cout << "1";
-	}
+	// dipakai ama Car doang sih
 }
 
 void Game::Update() {
-
-	// -- insert any update here
-	
+	timeBar.Update();
 }
 
 const bool Game::IsExit() const {
@@ -39,12 +31,14 @@ void Game::Draw() {
 	// begin drawing
 	canvas.BeginDraw();
 	
-	// -- insert any drawing here
+	timeBar.Draw(canvas);
+	
+	/*// -- insert any drawing here
 	for ( int i = 0; i < getmaxx(); i++ ) {
 		for ( int j = 0; j < getmaxy(); j++ ) {
 			putpixel( i, j, i % 16 );
 		}
-	}
+	}*/
 	
 	// end drawing
 	canvas.EndDraw();
