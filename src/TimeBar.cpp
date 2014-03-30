@@ -14,7 +14,7 @@ TimeBar::TimeBar() {
 	lines.push_back(Line(Point(40,470), Point(40,10) , color_border));
 	lines.push_back(Line(Point(40,10) , Point(10,10) , color_border));
 	
-	counter = 0;
+	counter = 29;
 }
 
 TimeBar::~TimeBar() {}
@@ -26,10 +26,12 @@ void TimeBar::Update() {
 		lines[3].P0.y += 10;
 		lines[3].P1.y += 10;
 	}
-	counter++;
-	if (counter == 30) {
-		counter = 0;
+
+	if (counter == 0) {
+		counter = 29;
 	}
+	
+	counter--;
 }
 
 void TimeBar::Draw(Canvas& canvas) {

@@ -5,6 +5,7 @@
 using namespace std;
 
 Game::Game() {
+	isBegun = false;
 	exit = false;
 }
 
@@ -12,11 +13,22 @@ Game::~Game() {
 }
 
 void Game::HandleInput() {
-	// dipakai ama Car doang sih
+	if (keypressed(KEY_LEFT)) {
+		if (!isBegun) {
+			isBegun = true;
+		}
+	}
+	if (keypressed(KEY_RIGHT)) {
+		if (!isBegun) {
+			isBegun = true;
+		}
+	}
 }
 
 void Game::Update() {
-	timeBar.Update();
+	if (isBegun) {
+		timeBar.Update();
+	}
 }
 
 const bool Game::IsExit() const {

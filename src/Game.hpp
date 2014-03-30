@@ -4,6 +4,9 @@
 #include "Canvas.hpp"
 #include "TimeBar.hpp"
 
+#define KEY_LEFT 37
+#define KEY_RIGHT 39
+
 // the main game object
 class Game {
 
@@ -32,6 +35,7 @@ class Game {
 	private:
 		Canvas canvas;
 		
+		bool isBegun;
 		bool exit;
 		
 		TimeBar timeBar;
