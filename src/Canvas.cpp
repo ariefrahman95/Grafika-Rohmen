@@ -1,4 +1,5 @@
 #include "Canvas.hpp"
+#include <deque>
 
 Canvas::Canvas() {
 	page = 0;
@@ -122,21 +123,32 @@ void Canvas::DrawLine(Line line, int color) { // Algoritma line bresenham
 	}
 }
 
-//void Canvas::DrawCircle(Circle circle, int color) {}
+void Canvas::DrawCircle(Circle circle, int color) {}
 
-void Canvas::Fill(Point P, int color) {
+void Canvas::Fill(Point P, int oldColor, int newColor) {
+	if (newColor == oldColor)
+		return;
 	
+	std::deque<Point> Q;
+	Q.push_back(P);
+	while (!Q.empty()) {
+		Point currP = Q.front();
+		Q.pop_front();
+		if (getpixel(currP.x, currP.y) == oldColor) {
+			putpixel(currP.x, currP.y, newColor);
+			Q.push_back(Point(currP.x + 1, currP.y    ));
+			Q.push_back(Point(currP.x - 1, currP.y    ));
+			Q.push_back(Point(currP.x    , currP.y + 1));
+			Q.push_back(Point(currP.x    , currP.y - 1));
+		}
+	}
 }
 
-void Canvas::FillFlood(Point P, int newColor, int oldColor) {
-	if (P.x >= 0 && P.x < getmaxx() && P.y >= 0 && P.y < getmaxy() && getpixel(P.x, P.y) == oldColor) {
-		int x = P.x;
-		int y = P.y;
-		putpixel(x, y, newColor);
-		FillFlood(Point(x+1, y  ), newColor, oldColor);
-		FillFlood(Point(x-1, y  ), newColor, oldColor);
-		FillFlood(Point(x  , y+1), newColor, oldColor);
-		FillFlood(Point(x  , y-1), newColor, oldColor);
+void Canvas::FillRectangle(int left, int bottom, int right, int up, int color) {
+	for (int i = up + 1; i < bottom; i++) {
+		for (int j = left + 1; j < right; j++) {
+			putpixel(j, i, color);
+		}
 	}
 }
 

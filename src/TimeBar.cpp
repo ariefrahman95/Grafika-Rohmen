@@ -6,8 +6,8 @@ using namespace std;
 TimeBar::TimeBar() {
 	position = Point(10,10);
 	
-	color_fill = 5;
-	color_border = 10;
+	color_fill = LIGHTCYAN;
+	color_border = WHITE;
 	
 	isTimeUp = false;
 	
@@ -39,10 +39,11 @@ void TimeBar::Update() {
 	
 	// kalo udah tinggal 5 detik, ubah warna time bar jadi merah
 	if (lines[0].P0.y == 390) {
-		color_border = 5;
-		for (int i = 0; i < lines.size(); i++) {
-			lines[i].color = color_border;
-		}
+		//color_border = 5;
+		color_fill = LIGHTRED;
+		//for (int i = 0; i < lines.size(); i++) {
+		//	lines[i].color = color_border;
+		//}
 	}
 	
 	// waktunya udah abis
@@ -55,7 +56,9 @@ void TimeBar::Draw(Canvas& canvas) {
 	for (int i = 0; i < lines.size(); i++) {
 		canvas.DrawLine(lines[i], color_border);
 	}
-	//canvas.FillFlood(Point(25,240), color_fill, 0);
+	
+	//canvas.Fill(Point(25, 464), getpixel(25, 464), 8);
+	canvas.FillRectangle(lines[1].P0.x, lines[0].P1.y, lines[1].P1.x, lines[0].P0.y, color_fill);
 }
 
 bool TimeBar::IsTimeUp() {

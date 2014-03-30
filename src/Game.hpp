@@ -35,8 +35,8 @@ class Game {
 	private:
 		Canvas canvas;
 		
-		bool isPlaying;
 		bool exit;
+		bool isPlaying;
 		
 		TimeBar timeBar;
 };
