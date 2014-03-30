@@ -1,23 +1,24 @@
 /**
  * Nama/NIM  : Setyo Legowo/13511071
  * Tanggal   : 30 Maret 2014
- * File      : Polygon.hpp
+ * File      : PolygonStack.hpp
  * Deskripsi : Polygon merupakan bentuk dari bidang yang dapat didefinisikan
  *             dengan jumlah minimal 3 titik.
  *             Polygon ini tidak dapat menjamin bahwa dapat membentuk polygon
  *             tertutup. Harus dipastikan oleh pengguna kelas ini sendiri.
- *             
+ *             Variasi dari polygon yang sebelumnya.
+ *
  */
 
 /**
  *
  * @author Setyo Legowo/13511071
- * @date 2014/03/30 21:00
+ * @date 2014/03/30 22:00
  *
  */
 
-#ifndef POLYGON_HPP
-#define POLYGON_HPP
+#ifndef POLYGONSTACK_HPP
+#define POLYGONSTACK_HPP
  
 #include "Point.hpp"
 #include <vector>
@@ -25,64 +26,72 @@
 typedef struct {
     int a;
     int b;
-} int_tuple;
+} int_tuple_stack;
 
-class Polygon {
+class PolygonStack {
     private:
         int n_titik;
-        std::vector<Point> listTitik;
-        std::vector<int_tuple> listPasangan;
+        std::vector<Point> listTitikLeft;
+        std::vector<Point> listTitikRight;
         
     public:
         // =====================================================================
         // CONSTRUCTOR, DESTRUCTOR, COPY CONSTRUCTOR
         // =====================================================================
         /**
-         * Konstruktor dari bidang polygon. Pada konstruktor titik akan
-         * didefinisikan terlebih dahulu. Secara default semua titik yang
-         * didefinisikan akan berada di posisi (0,0) dan titak terhubung.
-         * @param int Jumlah titik yang akan digunakan untuk membentuk polygon
+         * Konstruktor dari bidang polygon. Pada konstruktor titik tidak
+         * didefinisikan terlebih dahulu.
          */
-        Polygon(int /* jumlah_titik */);
+        PolygonStack();
         /**
          * Destruktor dari bidang polygon. Diupayakan akan membersihkan memory.
          */
-        ~Polygon();
+        ~PolygonStack();
         
         /**
          * @param Polygon objek polygon yang akan di "deep copy"
          */
-        Polygon(const Polygon&);
+        PolygonStack(const PolygonStack&);
         /**
          * @param Polygon objek polygon yang akan di "shallow copy"
          */
-        Polygon& operator=(const Polygon&);
+        PolygonStack& operator=(const PolygonStack&);
         
         // =====================================================================
         // METHODS
         // =====================================================================
         /**
-         * Mendefinisikan posisi dari anggota titik terdefinisi.
-         * Jika indeks tidak terdefinisi maka pengesetan posisi tidak dilakukan
-         * @param int Indeks titik yang akan didefinisikan
-         * @param int Definisikan titik (X)
-         * @param int Definisikan titik (Y)
+         * Mendefinisikan posisi dari anggota titik terdefinisi. Titik akan
+         * di konstruktsi oleh method.
+         * @param int Definisikan titik (X) titik kiri
+         * @param int Definisikan titik (Y) titik kiri
+         * @param int Definisikan titik (X) titik kanan
+         * @param int Definisikan titik (Y) titik kanan
          */
-        void define(int /* index */, double /* point x */, double /* point y */);
+        void push(double /* point x left */, double /* point y left */,
+                  double /* point x right */, double /* point y right */);
         
         /**
-         * Fungsi yang nantinya akan menggunakan fungsi 'define(int, double, double)'
-         * @param int Indeks titik yang akan didefinisikan
-         * @param Point Definisikan titik
+         * Mendefinisikan posisi dari anggota titik terdefinisi. Titik akan
+         * di konstruktsi (lagi) oleh method.
+         * @param Point Definisikan titik kiri
+         * @param Point Definisikan titik kanan
          */
-        void define(int /* index */, const Point& /* point */);
+        void push(const Point& /* point left */, const Point& /* point right */);
         
         /**
-         * Mendefinisikan titik-titik yang ingin terhubung.
-         * @param int Indeks pertama
-         * @param int Indeks kedua
+         * Mengambil kembali posisi titik akibat pop stack
+         * @param Point Output dari pop titik kiri. Dapat didefinisikan sebagai null
+         * @param Point Output dari pop titik kanan. Dapat didefinisikan sebagai null
          */
-        void hubung(int /* index 1*/, int /* index 2 */);
+        void pop(Point * /* point 1 */, Point * /* point 2 */);
+        
+        /**
+         * Mengambil kembali posisi titik akibat pop stack.
+         * Sama seperti pop(Point*, Point*) namun point akan didektruksi di dalam
+         * method ini.
+         */
+        void pop();
         
         // =====================================================================
         // TRANSFORMATION METHODS
