@@ -33,7 +33,7 @@ void Barrier::Draw(Canvas& canvas) {
 
 void Barrier::Update() {
 	if(type == WHEEL) {
-		if(wheel.R <= 75) wheel.R++;
+		if(wheel.R < 50) wheel.R++;
 		if(lane == 0) wheel.C.x--;
 		else if(lane == 1);
 		else if(lane == 2);
@@ -49,4 +49,3 @@ void Barrier::Update() {
 		wheel.C.y++;
 	}
 }
-

@@ -17,23 +17,22 @@ TimeBar::TimeBar() {
 	
 	// membuat time bar untuk lifetime 30 detik
 	road.push_back(Line(Point(10, 15), Point(10,465), road_border));
-	road.push_back(Line(Point(10,465), Point(40,465), road_border));
-	road.push_back(Line(Point(40,465), Point(40, 15), road_border));
-	road.push_back(Line(Point(40, 15), Point(10, 15), road_border));
+	road.push_back(Line(Point(10,465), Point(45,465), road_border));
+	road.push_back(Line(Point(45,465), Point(45, 15), road_border));
+	road.push_back(Line(Point(45, 15), Point(10, 15), road_border));
 	// jangan lupa garis putus2nya
-	road.push_back(Line(Point(20, 15), Point(20,465), road_border));
-	road.push_back(Line(Point(30, 15), Point(30,465), road_border));
+	road.push_back(Line(Point(28, 15), Point(28,465), road_border));
 	
 	// membuat mobil: badannya
-	car.push_back(Line(Point(21,465), Point(21,475), car_border));
-	car.push_back(Line(Point(21,475), Point(29,475), car_border));
-	car.push_back(Line(Point(29,475), Point(29,465), car_border));
-	car.push_back(Line(Point(29,465), Point(21,465), car_border));
+	car.push_back(Line(Point(23,465), Point(23,475), car_border));
+	car.push_back(Line(Point(23,475), Point(31,475), car_border));
+	car.push_back(Line(Point(31,475), Point(31,465), car_border));
+	car.push_back(Line(Point(31,465), Point(23,465), car_border));
 	// dan rodanya
-	car.push_back(Line(Point(20,467), Point(20,469), car_border));
-	car.push_back(Line(Point(20,471), Point(20,473), car_border));
-	car.push_back(Line(Point(30,467), Point(30,469), car_border));
-	car.push_back(Line(Point(30,471), Point(30,473), car_border));
+	car.push_back(Line(Point(22,467), Point(22,469), car_border));
+	car.push_back(Line(Point(22,471), Point(22,473), car_border));
+	car.push_back(Line(Point(32,467), Point(32,469), car_border));
+	car.push_back(Line(Point(32,471), Point(32,473), car_border));
 	
 	// inisiasi Timer
 	counter = 29;
@@ -88,15 +87,15 @@ bool TimeBar::IsTimeUp() {
 
 void TimeBar::Move(int x) {
 	if (x == -1) { // ke kiri jangan ampe kelewatan
-		if (car[4].P0.x >= 20) {
+		if (car[4].P0.x - 2 >= 10) {
 			for (int i = 0; i < car.size(); i++) {
-				car[i].Translate(10*x,0);
+				car[i].Translate(-2,0);
 			}
 		}
 	} else { // ke kanan jangan ampe kelewatan
-		if (car[6].P0.x <= 30) {
+		if (car[4].P0.x + 2 <= 34) {
 			for (int i = 0; i < car.size(); i++) {
-				car[i].Translate(10*x,0);
+				car[i].Translate(2,0);
 			}
 		}
 	}
