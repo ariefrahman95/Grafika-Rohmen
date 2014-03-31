@@ -290,7 +290,9 @@ void Canvas::DrawCircle(Circle circle) {
     }
 }
 
-void Canvas::Fill(Point P, int oldColor, int newColor) {
+void Canvas::Fill(Point P, int oldColor, int newColor) {}
+
+void Canvas::FillFlood(Point P, int oldColor, int newColor) {
 	if (newColor == oldColor)
 		return;
 	

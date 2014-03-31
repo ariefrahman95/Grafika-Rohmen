@@ -43,11 +43,11 @@ Pemandangan::~Pemandangan() {
 void Pemandangan::Draw(Canvas& canvas) {
     pemandangan->Draw(canvas);
     jalan->Draw(canvas);
-    canvas.Fill(Point( 80,  1), 0, BLUE);
+    /*canvas.Fill(Point( 80,  1), 0, BLUE);
     canvas.Fill(Point(320,  1), 0, BLUE);
     canvas.Fill(Point(490,  1), 0, BLUE);
     canvas.Fill(Point(160, 10), 0, GREEN);
     canvas.Fill(Point(480, 10), 0, GREEN);
     
-    canvas.Fill(Point(320, 230), 0, LIGHTGRAY);
+    canvas.Fill(Point(320, 230), 0, LIGHTGRAY);*/
 }

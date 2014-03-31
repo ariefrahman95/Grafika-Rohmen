@@ -51,8 +51,8 @@ void Game::Draw() {
 	canvas.BeginDraw();
 	
     pemandangan.Draw(canvas);
-	timeBar.Draw(canvas);
 	b1.Draw(canvas);
+	timeBar.Draw(canvas);
 	
 	/*// drawing testing by Tito
 	for ( int i = 0; i < getmaxx(); i++ ) {
