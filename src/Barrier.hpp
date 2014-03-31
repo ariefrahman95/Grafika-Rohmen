@@ -2,6 +2,7 @@
 #define BARRIER_H
 #include <vector>
 #include "Circle.hpp"
+#include "Point.hpp"
 #include "Canvas.hpp"
 
 enum barrierType {WHEEL, WOOD, STONE};
@@ -12,7 +13,8 @@ class Barrier {
 		Circle wood;
 		Circle stone;
 		
-		int position;
+		Point position;
+		int lane;
 		int type;
 		
 		Barrier(int type);
