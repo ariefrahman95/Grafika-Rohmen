@@ -5,6 +5,7 @@
 #include "TimeBar.hpp"
 #include "Pemandangan.hpp"
 #include "Barrier.hpp"
+#include "Car.hpp"
 
 #define BKEY_LEFT 37
 #define BKEY_RIGHT 39
@@ -43,6 +44,7 @@ class Game {
 		TimeBar timeBar;
         Pemandangan pemandangan;
 		Barrier b1;
+		Car car;
 		// Barrier b2;
 		// Barrier b3;
 };

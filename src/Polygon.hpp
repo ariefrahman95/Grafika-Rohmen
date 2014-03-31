@@ -88,7 +88,13 @@ class Polygon2: public Drawable {
          */
         void define(int /* index */, const Point& /* point */);
         
-        /**
+		 /**
+         * Mengembalikan nilai titik index
+         * @param int Indeks titik yang dicari
+         */
+        Point getT(int /* index*/);
+		
+         /**
          * Mendefinisikan titik-titik yang ingin terhubung.
          * @param int Indeks pertama
          * @param int Indeks kedua

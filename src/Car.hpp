@@ -24,7 +24,7 @@ class Car: public Drawable {
 		void Move(int);
 		
 	private:
-		vector <Polygon> carshape;
+		vector <Polygon2> carS; //vector shape mobil
 		Point position;
 
 };

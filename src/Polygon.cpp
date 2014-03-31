@@ -84,6 +84,11 @@ void Polygon2::define(int index, double x, double y) {
 void Polygon2::define(int index, const Point& point) {
     define(index, point.x, point.y);
 }
+
+Point Polygon2::getT(int index) {
+	return listTitik.at(index);
+}
+
 void Polygon2::hubung(int index1, int index2) {
     if(index1 >= this->n_titik || index1 < 0
         || index2 >= this->n_titik || index2 < 0)

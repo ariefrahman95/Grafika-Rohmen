@@ -18,6 +18,7 @@ void Game::HandleInput() {
 			isPlaying = true;
 		}
 		timeBar.Move(-1);
+		car.Move(-1);
 	}
 
 	if (keypressed(BKEY_RIGHT)) {
@@ -25,6 +26,7 @@ void Game::HandleInput() {
 			isPlaying = true;
 		}
 		timeBar.Move(1);
+		car.Move(1);		
 	}
 }
 
@@ -53,20 +55,22 @@ void Game::Draw() {
     pemandangan.Draw(canvas);
 	timeBar.Draw(canvas);
 	b1.Draw(canvas);
-	
+	car.Draw(canvas);
 	/*// drawing testing by Tito
 	for ( int i = 0; i < getmaxx(); i++ ) {
 		for ( int j = 0; j < getmaxy(); j++ ) {
 			putpixel( i, j, i % 16 );
 		}
-	}*/
-	
-	// end drawing
+	// drawing testing by Dinah
 	for ( int i = 246; i < 394; i++ ) {
 		for ( int j = 337; j < 465; j++ ) {
 			putpixel( i, j, i % 16 );
 		}
 	}
+	}*/
+	
+	// end drawing
+	
 	canvas.EndDraw();
 }
 
