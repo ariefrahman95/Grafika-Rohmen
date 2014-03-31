@@ -254,8 +254,8 @@ void Canvas::DrawCircle(Circle circle, int color) {
 	double yCenter = circle.C.y;
     
     int x = 0;
-	int y = (int) radius;
-    int p = 1 - (int) radius;
+	int y = (int) circle.R;
+    int p = 1 - (int) circle.R;
 
 	putpixel(xCenter + x, yCenter + y, color);
     putpixel(xCenter - x, yCenter + y, color);

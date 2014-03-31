@@ -6,9 +6,11 @@
  */
 
 #include "Polygon.hpp"
+#include "Line.hpp"
 
 Polygon::Polygon(int jumlah_titik) {
     this->n_titik = 0;
+    this->warna = 0;
     if(jumlah_titik < 3)
         return;
     
@@ -21,12 +23,14 @@ Polygon::Polygon(int jumlah_titik) {
 }
 Polygon::~Polygon() {
     this->n_titik = 0;
+    this->warna = 0;
     this->listTitik.clear();
     this->listPasangan.clear();
 }
 Polygon::Polygon(const Polygon& Pol) {
     int it;
     this->n_titik = Pol.n_titik;
+    this->warna = Pol.warna;
     
     this->listTitik.clear();
     for(it = 0; it < this->n_titik; it++) {
@@ -44,6 +48,7 @@ Polygon::Polygon(const Polygon& Pol) {
 Polygon& Polygon::operator=(const Polygon& Pol) {
     int it;
     this->n_titik = Pol.n_titik;
+    this->warna = Pol.warna;
     
     this->listTitik.clear();
     for(it = 0; it < this->n_titik; it++) {
@@ -64,6 +69,9 @@ Polygon& Polygon::operator=(const Polygon& Pol) {
 // ===
 // METHODS
 // ===
+void Polygon::setColor(int color) {
+    this->warna = color;
+}
 void Polygon::define(int index, double x, double y) {
     if(index >= this->n_titik || index < 0 || x < 0.0 || y < 0.0)
         return;
@@ -114,6 +122,23 @@ void Polygon::lepas_hubung(int index1, int index2) {
     }
     if(it < size) {
         this->listPasangan.erase(this->listPasangan.begin() + it);
+    }
+}
+
+// ===
+// EXTENDS METHODS
+// ===
+void Polygon::Draw(Canvas& canvas) {
+    int i;
+    int_tuple _itpl;
+    int size = this->listPasangan.size();
+    
+    for(i = 0; i < size; i++) {
+        _itpl = this->listPasangan.at(i);
+        Line ll(this->listTitik.at(_itpl.a),
+            this->listTitik.at(_itpl.b),
+            this->warna);
+        canvas.DrawLine(ll, this->warna);
     }
 }
 
