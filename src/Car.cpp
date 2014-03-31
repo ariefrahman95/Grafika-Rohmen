@@ -79,12 +79,14 @@ void Car::Draw(Canvas& canvas){
 	carS.at(2).Draw(canvas);
 	canvas.FillRect(carS.at(2).getT(0).x, carS.at(2).getT(0).y, carS.at(2).getT(2).x, carS.at(2).getT(2).y, 1);
 	carS.at(3).Draw(canvas);
+	
 	Point P1 = carS.at(3).getT(0); 
 	canvas.Fill(P1+=Point(1,-1), 8, CYAN);
+	canvas.Fill(P1+=Point(10,-1), 8, CYAN);
+	
 	Point P2 = carS.at(4).getT(0);
 	carS.at(4).Draw(canvas);
-	canvas.FillFlood(P2+=Point(1,-1), CYAN, 8);
-	
+	canvas.FillFlood(P2+=Point(1,-1), CYAN, BLUE);
 	
 }
 void Car::Update(){

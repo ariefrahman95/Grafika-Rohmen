@@ -19,6 +19,7 @@ void Canvas::BeginDraw() {
 	drawing = true;
 	setactivepage( InactivePage() );
 	cleardevice();
+	setbkcolor(GREEN);
 }
 
 void Canvas::EndDraw() {
