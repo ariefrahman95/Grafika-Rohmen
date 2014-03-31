@@ -55,6 +55,7 @@ void Game::Draw() {
     pemandangan.Draw(canvas);
 	b1.Draw(canvas);
 	timeBar.Draw(canvas);
+	car.Draw(canvas);
 	
 	/*// drawing testing by Tito
 	for ( int i = 0; i < getmaxx(); i++ ) {
