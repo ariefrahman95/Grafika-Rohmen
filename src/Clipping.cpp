@@ -9,7 +9,7 @@
 #define hTop 160
 #define hBottom 480
 #define wLeft 120
-#define wRight 240
+#define wRight 360
  
 // Returns the region code of a point
 int findRegion(int x, int y) {

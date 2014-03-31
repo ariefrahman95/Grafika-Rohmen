@@ -1,5 +1,6 @@
 #include "Canvas.hpp"
 #include <deque>
+#include <iostream>
 
 Canvas::Canvas() {
 	page = 0;
@@ -249,32 +250,16 @@ void Canvas::DrawDash(Line line, int on_length, int off_length, int color) { // 
 	}
 }
 
-void Canvas::DrawCircle(Circle circle, int color) {
+void Canvas::DrawCircle(Circle circle) {
 	double xCenter = circle.C.x;
 	double yCenter = circle.C.y;
     
     int x = 0;
-	int y = (int) radius;
-    int p = 1 - (int) radius;
-
-	putpixel(xCenter + x, yCenter + y, color);
-    putpixel(xCenter - x, yCenter + y, color);
-    putpixel(xCenter + x, yCenter - y, color);
-    putpixel(xCenter - x, yCenter - y, color);
-    putpixel(xCenter + y, yCenter + x, color);
-    putpixel(xCenter - y, yCenter + x, color);
-    putpixel(xCenter + y, yCenter - x, color);
-    putpixel(xCenter - y, yCenter - x, color);
-
-    while (x < y) {
-	x++;
-	if (p < 0)
-	    p += (x << 1) + 1;
-	else {
-	    y--;
-	    p += ((x - y) << 1) + 1;
-	}
+	int y = (int) circle.R;
+    int p = 1 - (int) circle.R;
 	
+	int color = circle.color;
+
 	putpixel(xCenter + x, yCenter + y, color);
     putpixel(xCenter - x, yCenter + y, color);
     putpixel(xCenter + x, yCenter - y, color);
@@ -283,6 +268,24 @@ void Canvas::DrawCircle(Circle circle, int color) {
     putpixel(xCenter - y, yCenter + x, color);
     putpixel(xCenter + y, yCenter - x, color);
     putpixel(xCenter - y, yCenter - x, color);
+	
+    while (x < y) {
+		x++;
+		if (p < 0)
+			p += (x << 1) + 1;
+		else {
+			y--;
+			p += ((x - y) << 1) + 1;
+		}
+		
+		putpixel(xCenter + x, yCenter + y, color);
+		putpixel(xCenter - x, yCenter + y, color);
+		putpixel(xCenter + x, yCenter - y, color);
+		putpixel(xCenter - x, yCenter - y, color);
+		putpixel(xCenter + y, yCenter + x, color);
+		putpixel(xCenter - y, yCenter + x, color);
+		putpixel(xCenter + y, yCenter - x, color);
+		putpixel(xCenter - y, yCenter - x, color);
     }
 }
 
