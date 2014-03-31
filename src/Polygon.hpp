@@ -32,7 +32,7 @@ typedef struct {
     int b;
 } int_tuple;
 
-class Polygon: public Drawable {
+class Polygon2: public Drawable {
     private:
         int n_titik;
         int warna;
@@ -49,20 +49,20 @@ class Polygon: public Drawable {
          * didefinisikan akan berada di posisi (0,0) dan titak terhubung.
          * @param int Jumlah titik yang akan digunakan untuk membentuk polygon
          */
-        Polygon(int /* jumlah_titik */);
+        Polygon2(int /* jumlah_titik */);
         /**
          * Destruktor dari bidang polygon. Diupayakan akan membersihkan memory.
          */
-        ~Polygon();
+        virtual ~Polygon2();
         
         /**
          * @param Polygon objek polygon yang akan di "deep copy"
          */
-        Polygon(const Polygon&);
+        Polygon2(const Polygon2&);
         /**
          * @param Polygon objek polygon yang akan di "deep copy"
          */
-        Polygon& operator=(const Polygon&);
+        Polygon2& operator=(const Polygon2&);
         
         // =====================================================================
         // METHODS

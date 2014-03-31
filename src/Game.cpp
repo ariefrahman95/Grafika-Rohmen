@@ -4,7 +4,7 @@
 #include <Windows.h>
 using namespace std;
 
-Game::Game() {
+Game::Game() : b1(WHEEL) {
 	isPlaying = false;
 	exit = false;
 }
@@ -13,14 +13,14 @@ Game::~Game() {
 }
 
 void Game::HandleInput() {
-	if (keypressed(KEY_LEFT)) {
+	if (keypressed(BKEY_LEFT)) {
 		if (!isPlaying && !timeBar.IsTimeUp()) {
 			isPlaying = true;
 		}
 		timeBar.Move(-1);
 	}
 
-	if (keypressed(KEY_RIGHT)) {
+	if (keypressed(BKEY_RIGHT)) {
 		if (!isPlaying && !timeBar.IsTimeUp()) {
 			isPlaying = true;
 		}
@@ -31,6 +31,7 @@ void Game::HandleInput() {
 void Game::Update() {
 	if (isPlaying) {
 		timeBar.Update();
+		b1.Update();
 		if (timeBar.IsTimeUp()) {
 			isPlaying = false;
 		}
@@ -49,7 +50,9 @@ void Game::Draw() {
 	// begin drawing
 	canvas.BeginDraw();
 	
+    pemandangan.Draw(canvas);
 	timeBar.Draw(canvas);
+	b1.Draw(canvas);
 	
 	/*// drawing testing by Tito
 	for ( int i = 0; i < getmaxx(); i++ ) {
