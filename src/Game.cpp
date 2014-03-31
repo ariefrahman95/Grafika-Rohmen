@@ -53,8 +53,8 @@ void Game::Draw() {
 	canvas.BeginDraw();
 	
     pemandangan.Draw(canvas);
-	timeBar.Draw(canvas);
 	b1.Draw(canvas);
+	timeBar.Draw(canvas);
 	
 	/*// drawing testing by Tito
 	for ( int i = 0; i < getmaxx(); i++ ) {
@@ -64,6 +64,11 @@ void Game::Draw() {
 	}*/
 	
 	// end drawing
+	for ( int i = 246; i < 394; i++ ) {
+		for ( int j = 337; j < 465; j++ ) {
+			putpixel( i, j, i % 16 );
+		}
+	}
 	canvas.EndDraw();
 }
 

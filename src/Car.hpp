@@ -3,11 +3,14 @@
 
 #include "Circle.hpp"
 #include "Line.hpp"
+#include "Drawable.hpp"
+#include "Polygon.hpp"
+
 #include <vector>
 
 using namespace std;
 
-class Car {
+class Car: public Drawable {
 	public:
 		// ctor-dtor-cctor
 		Car();
@@ -16,12 +19,12 @@ class Car {
 		Car& operator=(const Car&);
 		
 		//methods
+		void Draw(Canvas&);
 		void Update();
 		void Move(int);
 		
 	private:
-		vector <Line> lines;
-		vector <Circle> circles;
+		vector <Polygon> carshape;
 		Point position;
 
 };

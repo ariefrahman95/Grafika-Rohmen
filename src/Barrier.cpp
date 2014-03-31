@@ -6,17 +6,17 @@ Barrier::Barrier(int type) {
 	srand(time(NULL));
 	lane = rand() % 3;
 	if(type == WHEEL) {
-		Point p(320, 0);
+		Point p(320, 220);
 		wheel.C = p;
 		wheel.R = 1;
 		wheel.color = 255;
 	} else if(type == WOOD) {
-		Point p(320, 0);
+		Point p(320, 220);
 		wheel.C = p;
 		wheel.R = 1;
 		wheel.color = 128;
 	} else if(type == STONE) {
-	Point p(320, 0);
+		Point p(320, 220);
 		wheel.C = p;
 		wheel.R = 1;
 		wheel.color = 64;
