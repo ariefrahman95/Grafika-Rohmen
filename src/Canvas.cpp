@@ -249,7 +249,42 @@ void Canvas::DrawDash(Line line, int on_length, int off_length, int color) { // 
 	}
 }
 
-void Canvas::DrawCircle(Circle circle, int color) {}
+void Canvas::DrawCircle(Circle circle, int color) {
+	double xCenter = circle.C.x;
+	double yCenter = circle.C.y;
+    
+    double x = 0;
+	double y = radius;
+    double p = 1 - radius;
+
+	putpixel(xCenter + x, yCenter + y, color);
+    putpixel(xCenter - x, yCenter + y, color);
+    putpixel(xCenter + x, yCenter - y, color);
+    putpixel(xCenter - x, yCenter - y, color);
+    putpixel(xCenter + y, yCenter + x, color);
+    putpixel(xCenter - y, yCenter + x, color);
+    putpixel(xCenter + y, yCenter - x, color);
+    putpixel(xCenter - y, yCenter - x, color);
+
+    while (x < y) {
+	x++;
+	if (p < 0)
+	    p += (x << 1) + 1;
+	else {
+	    y--;
+	    p += ((x - y) << 1) + 1;
+	}
+	
+	putpixel(xCenter + x, yCenter + y, color);
+    putpixel(xCenter - x, yCenter + y, color);
+    putpixel(xCenter + x, yCenter - y, color);
+    putpixel(xCenter - x, yCenter - y, color);
+    putpixel(xCenter + y, yCenter + x, color);
+    putpixel(xCenter - y, yCenter + x, color);
+    putpixel(xCenter + y, yCenter - x, color);
+    putpixel(xCenter - y, yCenter - x, color);
+    }
+}
 
 void Canvas::Fill(Point P, int oldColor, int newColor) {
 	if (newColor == oldColor)

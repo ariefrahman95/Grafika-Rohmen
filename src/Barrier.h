@@ -1,25 +1,20 @@
 #ifndef BARRIER_H
 #define BARRIER_H
 #include <vector>
-#include "Stroke.h"
+#include "Line.h"
+#include "Circle.h"
+#include "Point.h"
 
 enum barrierType {WHEEL, WOOD, STONE};
 
-class Barrier {
+class Barrier : public Drawable{
 	private:
-		std::vector<Stroke> strokes;
-		float position;
-		barrierType type;
+		std::vector<Line> lineArr;
+		std::vector<Circle> circleArr;
+		Point position;
 	public:
 		Barrier(int type);
-		
 		void update();
-		void draw();
-		void translate();
-		void scale();
-		void rotate();
-		void reflect();
-		void shear();
 };
 
 #endif

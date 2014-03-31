@@ -6,6 +6,9 @@
  * Left  Right  Bottom Top
  */
  
+#define h 320
+#define w 240
+ 
 // Returns the region code of a point
 int findRegion(int x, int y) {
 	int code = 0;
