@@ -3,6 +3,7 @@
 
 #include "Canvas.hpp"
 #include "TimeBar.hpp"
+#include "Barrier.hpp"
 
 #define KEY_LEFT 37
 #define KEY_RIGHT 39
@@ -39,6 +40,9 @@ class Game {
 		bool isPlaying;
 		
 		TimeBar timeBar;
+		Barrier b1;
+		// Barrier b2;
+		// Barrier b3;
 };
 
 #endif
