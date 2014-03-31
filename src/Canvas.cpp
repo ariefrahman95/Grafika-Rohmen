@@ -249,13 +249,15 @@ void Canvas::DrawDash(Line line, int on_length, int off_length, int color) { // 
 	}
 }
 
-void Canvas::DrawCircle(Circle circle, int color) {
+void Canvas::DrawCircle(Circle circle) {
 	double xCenter = circle.C.x;
 	double yCenter = circle.C.y;
     
     int x = 0;
 	int y = (int) circle.R;
     int p = 1 - (int) circle.R;
+	
+	int color = circle.color;
 
 	putpixel(xCenter + x, yCenter + y, color);
     putpixel(xCenter - x, yCenter + y, color);
