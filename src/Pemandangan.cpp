@@ -57,14 +57,14 @@ void Pemandangan::Draw(Canvas& canvas) {
     pemandangan->Draw(canvas);
     jalan->Draw(canvas);
     marka_jalan->Draw(canvas);
-    canvas.Fill(Point( 80,  1), 0, BLUE);
-    canvas.Fill(Point(320,  1), 0, BLUE);
-    canvas.Fill(Point(490,  1), 0, BLUE);
-    canvas.Fill(Point(160, 10), 0, GREEN);
-    canvas.Fill(Point(480, 10), 0, GREEN);
+    canvas.FillFlood(Point( 80,  1), 0, BLUE);
+    canvas.FillFlood(Point(320,  1), 0, BLUE);
+    canvas.FillFlood(Point(490,  1), 0, BLUE);
+    canvas.FillFlood(Point(160, 10), 0, GREEN);
+    canvas.FillFlood(Point(480, 10), 0, GREEN);
     
-    canvas.Fill(Point(280, 230), 0, DARKGRAY);
-    canvas.Fill(Point(320, marka_y + 10), 0, WHITE);
+    canvas.FillFlood(Point(280, 230), 0, DARKGRAY);
+    canvas.FillFlood(Point(320, marka_y + 10), 0, WHITE);
 }
 
 void Pemandangan::Update() {

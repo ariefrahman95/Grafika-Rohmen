@@ -291,7 +291,25 @@ void Canvas::DrawCircle(Circle circle) {
     }
 }
 
-void Canvas::Fill(Point P, int oldColor, int newColor) {}
+void Canvas::Fill(Point P, int oldColor, int newColor) {
+	if (newColor == oldColor)
+		return;
+	
+	std::deque<Point> Q;
+	Q.push_back(P);
+	while (!Q.empty()) {
+		Point currP = Q.front();
+		Q.pop_front();
+		if ((int) getpixel(currP.x, currP.y) == oldColor || (int) getpixel(currP.x, currP.y) == 0 ||(int) getpixel(currP.x, currP.y) == 15) {
+			putpixel(currP.x, currP.y, newColor);
+			Q.push_back(Point(currP.x + 1, currP.y    ));
+			Q.push_back(Point(currP.x - 1, currP.y    ));
+			Q.push_back(Point(currP.x    , currP.y + 1));
+			Q.push_back(Point(currP.x    , currP.y - 1));
+		}
+	}
+
+}
 
 void Canvas::FillFlood(Point P, int oldColor, int newColor) {
 	if (newColor == oldColor)

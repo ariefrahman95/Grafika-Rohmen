@@ -46,10 +46,10 @@ Car::Car(){
 		
 	//jendela
 	carS.at(4).define(0,276,374);
-	carS.at(4).define(1,286,352);
-	carS.at(4).define(2,354,352);
+	carS.at(4).define(1,281,352);
+	carS.at(4).define(2,359,352);
 	carS.at(4).define(3,364,374);
-	carS.at(4).setColor(DARKGRAY);
+	carS.at(4).setColor(LIGHTGRAY);
 	carS.at(4).hubung(3, 0); 
 	for (int i=0; i<3; i++)
 		carS.at(4).hubung(i, i+1); 
@@ -79,11 +79,11 @@ void Car::Draw(Canvas& canvas){
 	carS.at(2).Draw(canvas);
 	canvas.FillRect(carS.at(2).getT(0).x, carS.at(2).getT(0).y, carS.at(2).getT(2).x, carS.at(2).getT(2).y, 1);
 	carS.at(3).Draw(canvas);
-	Point P1 = carS.at(3).getT(0);
-	canvas.Fill(P1+=Point(1,1), 0, 3);
+	Point P1 = carS.at(3).getT(0); 
+	canvas.Fill(P1+=Point(1,-1), 8, CYAN);
 	Point P2 = carS.at(4).getT(0);
 	carS.at(4).Draw(canvas);
-	canvas.Fill(P2+=Point(1,1), 0, 7);
+	canvas.FillFlood(P2+=Point(1,-1), CYAN, 8);
 	
 	
 }

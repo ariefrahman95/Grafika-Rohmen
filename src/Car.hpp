@@ -1,8 +1,6 @@
 #ifndef CAR_HPP
 #define CAR_HPP
 
-#include "Circle.hpp"
-#include "Line.hpp"
 #include "Drawable.hpp"
 #include "Polygon.hpp"
 
