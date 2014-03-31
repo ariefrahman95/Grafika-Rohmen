@@ -6,7 +6,8 @@
 
 class Pemandangan: public Drawable {
     private:
-        Polygon2 * pemandangan, * jalan;
+        Polygon2 * pemandangan, * jalan, * marka_jalan;
+        int marka_y, iteration;
         
     public:
         // =====================================================================
@@ -19,6 +20,11 @@ class Pemandangan: public Drawable {
         // EXTENDS METHOD
         // =====================================================================
         void Draw(Canvas& /* canvas */);
+        
+        // =====================================================================
+        // METHODS
+        // =====================================================================
+        void Update();
 };
 
 #endif /* PEMANDANGAN_HPP */

@@ -7,6 +7,7 @@ using namespace std;
 Game::Game() : b1(WHEEL) {
 	isPlaying = false;
 	exit = false;
+    isInitialBg = false;
 }
 
 Game::~Game() {
@@ -18,7 +19,6 @@ void Game::HandleInput() {
 			isPlaying = true;
 		}
 		timeBar.Move(-1);
-		car.Move(-1);
 	}
 
 	if (keypressed(BKEY_RIGHT)) {
@@ -26,7 +26,6 @@ void Game::HandleInput() {
 			isPlaying = true;
 		}
 		timeBar.Move(1);
-		car.Move(1);		
 	}
 }
 
@@ -34,6 +33,7 @@ void Game::Update() {
 	if (isPlaying) {
 		timeBar.Update();
 		b1.Update();
+        pemandangan.Update();
 		if (timeBar.IsTimeUp()) {
 			isPlaying = false;
 		}
@@ -53,24 +53,22 @@ void Game::Draw() {
 	canvas.BeginDraw();
 	
     pemandangan.Draw(canvas);
-	timeBar.Draw(canvas);
 	b1.Draw(canvas);
-	car.Draw(canvas);
+	timeBar.Draw(canvas);
+	
 	/*// drawing testing by Tito
 	for ( int i = 0; i < getmaxx(); i++ ) {
 		for ( int j = 0; j < getmaxy(); j++ ) {
 			putpixel( i, j, i % 16 );
 		}
-	// drawing testing by Dinah
+	}*/
+	
+	// end drawing
 	for ( int i = 246; i < 394; i++ ) {
 		for ( int j = 337; j < 465; j++ ) {
 			putpixel( i, j, i % 16 );
 		}
 	}
-	}*/
-	
-	// end drawing
-	
 	canvas.EndDraw();
 }
 
@@ -82,6 +80,6 @@ void Game::Run() {
 		Draw();
 		
 		// sleep to make game run at 30 FPS
-		delay( 1000 / 30);
+		//delay( 1000 / 30);
 	}
 }
