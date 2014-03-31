@@ -24,7 +24,7 @@ class Canvas {
 		
 		void DrawLine(Line, int);
 		void DrawDash(Line, int, int, int);
-		void DrawCircle(Circle, int);
+		void DrawCircle(Circle);
 
 		void Fill(Point, int, int); // algoritma Flood-Fill dengan queue
 		void FillRect(int, int, int, int, int);

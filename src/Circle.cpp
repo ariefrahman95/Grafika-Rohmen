@@ -8,7 +8,7 @@ Circle::Circle() {
 
 Circle::Circle(Point C, double r, int color) {
 	this->C = C;
-	this->R = R;
+	this->R = r;
 	this->color = color;
 }
 

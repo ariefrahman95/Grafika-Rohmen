@@ -43,7 +43,7 @@ Point& Point::operator*=(const double k) {
 
 // swap x-y or y-x
 void Point::Swap() {
-	auto t = x;
-		 x = y;
-		 y = t;
+	int t = x;
+	x = y;
+	y = t;
 }

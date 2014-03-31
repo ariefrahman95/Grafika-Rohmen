@@ -16,7 +16,7 @@ class Circle {
 		void Translate(double, double);
 		void Scale(double, const Point);
 		void Rotate(double, const Point);
-
+	
 		Point C;
 		double R;
 		int color;

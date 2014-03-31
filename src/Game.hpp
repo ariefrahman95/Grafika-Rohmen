@@ -3,9 +3,11 @@
 
 #include "Canvas.hpp"
 #include "TimeBar.hpp"
+#include "Pemandangan.hpp"
+#include "Barrier.hpp"
 
-#define KEY_LEFT 37
-#define KEY_RIGHT 39
+#define BKEY_LEFT 37
+#define BKEY_RIGHT 39
 
 // the main game object
 class Game {
@@ -39,6 +41,10 @@ class Game {
 		bool isPlaying;
 		
 		TimeBar timeBar;
+        Pemandangan pemandangan;
+		Barrier b1;
+		// Barrier b2;
+		// Barrier b3;
 };
 
 #endif

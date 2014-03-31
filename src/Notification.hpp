@@ -8,4 +8,5 @@ class Notification {
 		~Notification();
 		//method
 		void Update();
-}
+};
+#endif
