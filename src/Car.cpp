@@ -80,9 +80,13 @@ void Car::Draw(Canvas& canvas){
 	canvas.FillRect(carS.at(2).getT(0).x, carS.at(2).getT(0).y, carS.at(2).getT(2).x, carS.at(2).getT(2).y, 1);
 	carS.at(3).Draw(canvas);
 	
-	Point P1 = carS.at(3).getT(0); 
-	canvas.Fill(P1+=Point(1,-1), 8, CYAN);
-	canvas.Fill(P1+=Point(10,-1), 8, CYAN);
+	Point P1 = carS.at(3).getT(0);
+	P1 += Point(1,-1);
+	canvas.Fill(P1, getpixel(P1.x, P1.y), CYAN);
+	
+	P1 = carS.at(3).getT(3);
+	P1 += Point(-1,-1);
+	canvas.Fill(P1, getpixel(P1.x, P1.y), CYAN);
 	
 	Point P2 = carS.at(4).getT(0);
 	carS.at(4).Draw(canvas);
