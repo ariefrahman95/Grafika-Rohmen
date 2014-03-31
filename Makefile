@@ -8,11 +8,11 @@ rohmen: lib/libopenbgi.a $(OBJS)
 
 lib/libopenbgi.a:
 	mingw32-make -C openbgi
-	#copy openbgi\openbgi.a lib\libopenbgi.a
-	#mingw32-make -C openbgi clean
+	copy openbgi\openbgi.a lib\libopenbgi.a
+	mingw32-make -C openbgi clean
 
 %.o: src/%.cpp
 	$(CC) $(CFLAGS) -c $<
 	
 clean:
-	#del /s *.exe *.o
+	del /s *.exe *.o
