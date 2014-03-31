@@ -123,6 +123,132 @@ void Canvas::DrawLine(Line line, int color) { // Algoritma line bresenham
 	}
 }
 
+void Canvas::DrawDash(Line line, int on_length, int off_length, int color) { // pake algoritma bresenham
+	// KASUS I: Kalo garis hor/ver langsung ajah, ngapain ribet2
+	if (line.P0.x == line.P1.x) { // hor
+		int start = (line.P0.y < line.P1.y) ? line.P0.y : line.P1.y;
+		int end = (line.P0.y > line.P1.y) ? line.P0.y : line.P1.y;
+		int counter = 0;
+		for (int i = start; i <= end; i++) {
+			if (counter < on_length)
+				putpixel(line.P0.x, i, color);
+			
+			counter++;
+			
+			if (counter == on_length + off_length)
+				counter = 0;
+		}
+		return;
+	}
+	
+	if (line.P0.y == line.P1.y) { //  ver
+		int start = (line.P0.x < line.P1.x) ? line.P0.x : line.P1.x;
+		int end = (line.P0.x > line.P1.x) ? line.P0.x : line.P1.x;
+		int counter = 0;
+		for (int i = start; i <= end; i++) {
+			if (counter < on_length)
+				putpixel(i, line.P0.y, color);
+			
+			counter++;
+			
+			if (counter == on_length + off_length)
+				counter = 0;
+		}
+		return;
+	}
+	
+	// KASUS II: Miring garisnya, mau ga mau ya mau
+	int m; // mode iterasi: 0-iterasi pada x (normal); 1-iterasi pada y
+
+	// algoritma preinisiasi
+	int dx = line.P1.x - line.P0.x;
+	int dy = line.P1.y - line.P0.y;
+
+	if (ABS(dx) < ABS(dy)) { // garis menanjak (abs(m) > 1), iterasi pada y
+		m = 1;
+		
+		// pertukarkan nilai x dengan y untuk kedua titik
+		line.P0.Swap();
+		line.P1.Swap();
+	} else { // garis melandai (0 < abs(m) <= 1), iterasi pada x
+		m = 0;
+	}
+
+	// memastikan P0.x <= P1.x
+	if (line.P0.x > line.P1.x) {
+		int temp;
+		
+		temp = line.P0.x;
+		line.P0.x = line.P1.x;
+		line.P1.x = temp;
+
+		temp = line.P0.y;
+		line.P0.y = line.P1.y;
+		line.P1.y = temp;
+	}
+	
+	// algoritma
+	// inisiasi
+	dx = line.P1.x - line.P0.x;
+	dy = line.P1.y - line.P0.y;
+	
+	// inisiasi fungsi parameter
+	int p = 2*dy-dx;
+	int c0 = 2*dy; // konstanta 1
+	int c1 = 2*(dy-dx); // konstanta 2
+	
+	if (dy < 0) {
+		p *= -1;
+		c0 *= -1;
+		c1 = -2*(dy+dx);
+	}
+	
+	// inisiasi pixel
+	int x = line.P0.x;
+	int y = line.P0.y;
+	
+	if (m) {
+		putpixel(y, x, color);
+	} else {
+		putpixel(x, y, color);
+	}
+	
+	int counter = 0;
+	
+	// iterasi pixel
+	for (x = line.P0.x + 1; x <= line.P1.x; x++) {
+		// menentukan nilai p selanjutnya
+		if (p < 0) { // nilai y selanjutnya sama dengan y sekarang
+			p += c0;
+		} else { // nilai y selanjutnya lebih/kurang 1 dari y sekarang
+			p += c1;
+			if (dy < 0) {
+				y--;
+			} else {
+				y++;
+			}
+		}
+		
+		if (m) {
+			if (counter < on_length)
+				putpixel(y, x, color);
+			
+			counter++;
+			
+			if (counter == on_length + off_length)
+				counter = 0;
+		} else {
+			if (counter < on_length)
+				putpixel(x, y, color);
+			
+			counter++;
+			
+			if (counter == on_length + off_length)
+				counter = 0;
+		}
+	}
+}
+
 void Canvas::DrawCircle(Circle circle, int color) {}
 
 void Canvas::Fill(Point P, int oldColor, int newColor) {
@@ -144,7 +270,7 @@ void Canvas::Fill(Point P, int oldColor, int newColor) {
 	}
 }
 
-void Canvas::FillRectangle(int left, int bottom, int right, int up, int color) {
+void Canvas::FillRect(int left, int bottom, int right, int up, int color) {
 	for (int i = up + 1; i < bottom; i++) {
 		for (int j = left + 1; j < right; j++) {
 			putpixel(j, i, color);

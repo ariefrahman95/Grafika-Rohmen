@@ -15,19 +15,24 @@ class TimeBar: public Drawable {
 		void Draw(Canvas&);
 		
 		bool IsTimeUp();
+		
+		void Move(int); // -1:bergerak ke kiri, 1:bergerak ke kanan
 
 	protected:
 		TimeBar(const TimeBar&);
 		TimeBar& operator=(const TimeBar&);
 	
 	private:
-		std::vector<Line> lines;
-		std::vector<Circle> circles;
+		std::vector<Line> road;
+		std::vector<Line> car;
 		
 		Point position;
 		
-		int color_fill;
-		int color_border;
+		int road_fill;
+		int road_border;
+		
+		int car_fill;
+		int car_border;
 		
 		bool isTimeUp;
 		

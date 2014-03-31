@@ -6,29 +6,47 @@ using namespace std;
 TimeBar::TimeBar() {
 	position = Point(10,10);
 	
-	color_fill = LIGHTCYAN;
-	color_border = WHITE;
+	// warna jalan dan mobil
+	road_fill = DARKGRAY;
+	road_border = LIGHTGRAY;
+	
+	car_fill = CYAN;
+	car_border = BLUE;
 	
 	isTimeUp = false;
 	
 	// membuat time bar untuk lifetime 30 detik
-	lines.push_back(Line(Point(10,15) , Point(10,465), color_border));
-	lines.push_back(Line(Point(10,465), Point(40,465), color_border));
-	lines.push_back(Line(Point(40,465), Point(40,15) , color_border));
-	lines.push_back(Line(Point(40,15) , Point(10,15) , color_border));
+	road.push_back(Line(Point(10, 15), Point(10,465), road_border));
+	road.push_back(Line(Point(10,465), Point(40,465), road_border));
+	road.push_back(Line(Point(40,465), Point(40, 15), road_border));
+	road.push_back(Line(Point(40, 15), Point(10, 15), road_border));
+	// jangan lupa garis putus2nya
+	road.push_back(Line(Point(20, 15), Point(20,465), road_border));
+	road.push_back(Line(Point(30, 15), Point(30,465), road_border));
 	
+	// membuat mobil: badannya
+	car.push_back(Line(Point(21,465), Point(21,475), car_border));
+	car.push_back(Line(Point(21,475), Point(29,475), car_border));
+	car.push_back(Line(Point(29,475), Point(29,465), car_border));
+	car.push_back(Line(Point(29,465), Point(21,465), car_border));
+	// dan rodanya
+	car.push_back(Line(Point(20,467), Point(20,469), car_border));
+	car.push_back(Line(Point(20,471), Point(20,473), car_border));
+	car.push_back(Line(Point(30,467), Point(30,469), car_border));
+	car.push_back(Line(Point(30,471), Point(30,473), car_border));
+	
+	// inisiasi Timer
 	counter = 29;
 }
 
 TimeBar::~TimeBar() {}
 
 void TimeBar::Update() {
-	// kurangin tinggi time bar sebanyak 1 pixel setiap 1/15 detik
+	// majuin mobil sejauh 1 pixel setiap 1/15 detik
 	if (counter % 2 == 0) {
-		lines[0].P0.y += 1;
-		lines[2].P1.y += 1;
-		lines[3].P0.y += 1;
-		lines[3].P1.y += 1;
+		for (int i = 0; i < car.size(); i++) {
+			car[i].Translate(0,-1);
+		}
 	}
 
 	if (counter == 0) {
@@ -37,30 +55,49 @@ void TimeBar::Update() {
 	
 	counter--;
 	
-	// kalo udah tinggal 5 detik, ubah warna time bar jadi merah
-	if (lines[0].P0.y == 390) {
-		//color_border = 5;
-		color_fill = LIGHTRED;
-		//for (int i = 0; i < lines.size(); i++) {
-		//	lines[i].color = color_border;
-		//}
-	}
-	
-	// waktunya udah abis
-	if (lines[0].P0.y == 465) {
+	// mobilnya udah sampe finish
+	if (car[0].P0.y == 15) {
 		isTimeUp = true;
 	}
 }
 
 void TimeBar::Draw(Canvas& canvas) {
-	for (int i = 0; i < lines.size(); i++) {
-		canvas.DrawLine(lines[i], color_border);
+	// warnain jalanan
+	for (int i = 0; i < 4; i++) {
+		canvas.DrawLine(road[i], road_border);
 	}
 	
-	//canvas.Fill(Point(25, 464), getpixel(25, 464), 8);
-	canvas.FillRectangle(lines[1].P0.x, lines[0].P1.y, lines[1].P1.x, lines[0].P0.y, color_fill);
+	canvas.FillRect(road[1].P0.x, road[0].P1.y, road[1].P1.x, road[0].P0.y, road_fill);
+	
+	// dan garis putus2nya
+	for (int i = 4; i < 6; i++) {
+		canvas.DrawDash(road[i], 10, 5, road_border);
+	}
+	
+	// warnain mobil
+	for (int i = 0; i < car.size(); i++) {
+		canvas.DrawLine(car[i], car_border);
+	}
+	
+	canvas.FillRect(car[1].P0.x, car[0].P1.y, car[1].P1.x, car[0].P0.y, car_fill);
 }
 
 bool TimeBar::IsTimeUp() {
 	return isTimeUp;
+}
+
+void TimeBar::Move(int x) {
+	if (x == -1) { // ke kiri jangan ampe kelewatan
+		if (car[4].P0.x >= 20) {
+			for (int i = 0; i < car.size(); i++) {
+				car[i].Translate(10*x,0);
+			}
+		}
+	} else { // ke kanan jangan ampe kelewatan
+		if (car[6].P0.x <= 30) {
+			for (int i = 0; i < car.size(); i++) {
+				car[i].Translate(10*x,0);
+			}
+		}
+	}
 }

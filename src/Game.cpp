@@ -14,14 +14,17 @@ Game::~Game() {
 
 void Game::HandleInput() {
 	if (keypressed(KEY_LEFT)) {
-		if (!isPlaying) {
+		if (!isPlaying && !timeBar.IsTimeUp()) {
 			isPlaying = true;
 		}
+		timeBar.Move(-1);
 	}
+
 	if (keypressed(KEY_RIGHT)) {
-		if (!isPlaying) {
+		if (!isPlaying && !timeBar.IsTimeUp()) {
 			isPlaying = true;
 		}
+		timeBar.Move(1);
 	}
 }
 
@@ -67,6 +70,6 @@ void Game::Run() {
 		Draw();
 		
 		// sleep to make game run at 30 FPS
-		delay( 1000 / 30 );
+		delay( 1000 / 30);
 	}
 }

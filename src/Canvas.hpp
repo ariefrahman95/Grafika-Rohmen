@@ -23,9 +23,11 @@ class Canvas {
 		void EndDraw();
 		
 		void DrawLine(Line, int);
+		void DrawDash(Line, int, int, int);
 		void DrawCircle(Circle, int);
+
 		void Fill(Point, int, int); // algoritma Flood-Fill dengan queue
-		void FillRectangle(int, int, int, int, int);
+		void FillRect(int, int, int, int, int);
 		
 	protected:
 		// make the object non-copyable
