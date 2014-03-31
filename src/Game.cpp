@@ -7,6 +7,7 @@ using namespace std;
 Game::Game() : b1(WHEEL) {
 	isPlaying = false;
 	exit = false;
+    isInitialBg = false;
 }
 
 Game::~Game() {
@@ -32,6 +33,7 @@ void Game::Update() {
 	if (isPlaying) {
 		timeBar.Update();
 		b1.Update();
+        pemandangan.Update();
 		if (timeBar.IsTimeUp()) {
 			isPlaying = false;
 		}
@@ -73,6 +75,6 @@ void Game::Run() {
 		Draw();
 		
 		// sleep to make game run at 30 FPS
-		delay( 1000 / 30);
+		//delay( 1000 / 30);
 	}
 }

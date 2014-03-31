@@ -17,8 +17,8 @@ class Canvas {
 		// ctor-dtor
 		Canvas();
 		~Canvas();
-		
-		// any drawing method has to be inside BeginDraw and EndDraw
+        
+        // any drawing method has to be inside BeginDraw and EndDraw
 		void BeginDraw();
 		void EndDraw();
 		

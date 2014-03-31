@@ -3,6 +3,7 @@
 Pemandangan::Pemandangan() {
     pemandangan = new Polygon2(7);
     jalan = new Polygon2(4);
+    marka_jalan = new Polygon2(4);
     
     pemandangan->setColor(255);
     pemandangan->define(0,   0,   0);
@@ -33,6 +34,18 @@ Pemandangan::Pemandangan() {
     jalan->hubung(0, 2);
     jalan->hubung(1, 3);
     jalan->hubung(2, 3);
+    
+    marka_jalan->setColor(255);
+    marka_y = 220;
+    iteration = 0;
+    marka_jalan->define(0, 310, 220);
+    marka_jalan->define(1, 330, 220);
+    marka_jalan->define(2, 300, 300);
+    marka_jalan->define(3, 340, 300);
+    marka_jalan->hubung(0, 1);
+    marka_jalan->hubung(0, 2);
+    marka_jalan->hubung(1, 3);
+    marka_jalan->hubung(2, 3);
 }
 
 Pemandangan::~Pemandangan() {
@@ -43,11 +56,27 @@ Pemandangan::~Pemandangan() {
 void Pemandangan::Draw(Canvas& canvas) {
     pemandangan->Draw(canvas);
     jalan->Draw(canvas);
+    marka_jalan->Draw(canvas);
     canvas.Fill(Point( 80,  1), 0, BLUE);
     canvas.Fill(Point(320,  1), 0, BLUE);
     canvas.Fill(Point(490,  1), 0, BLUE);
     canvas.Fill(Point(160, 10), 0, GREEN);
     canvas.Fill(Point(480, 10), 0, GREEN);
     
-    canvas.Fill(Point(320, 230), 0, LIGHTGRAY);
+    canvas.Fill(Point(280, 230), 0, DARKGRAY);
+    canvas.Fill(Point(320, marka_y + 10), 0, WHITE);
+}
+
+void Pemandangan::Update() {
+    if(marka_y >= 400) {
+        marka_jalan->define(0, 310, 220);
+        marka_jalan->define(1, 330, 220);
+        marka_jalan->define(2, 300, 300);
+        marka_jalan->define(3, 340, 300);
+        marka_y = 220;
+    }
+    marka_jalan->scale(1.025);
+    marka_jalan->translate(2, 3);
+    marka_jalan->translate(3, 1);
+    marka_y+=3;
 }

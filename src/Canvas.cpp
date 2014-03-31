@@ -1,4 +1,5 @@
 #include "Canvas.hpp"
+#include <cstdlib>
 #include <iostream>
 #include <deque>
 
