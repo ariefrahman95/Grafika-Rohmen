@@ -21,12 +21,14 @@
 #define POLYGONSTACK_HPP
  
 #include "Point.hpp"
+#include "Drawable.hpp"
 #include <cstdlib>
 #include <vector>
 
-class PolygonStack {
+class PolygonStack: public Drawable {
     private:
         int n_titik;
+        int warna;
         std::vector<Point> listTitikLeft;
         std::vector<Point> listTitikRight;
         
@@ -56,6 +58,11 @@ class PolygonStack {
         // =====================================================================
         // METHODS
         // =====================================================================
+        /**
+         * Set warna
+         * @param int Definisikan warna dalam bentuk bilangan bulat
+         */
+        void setColor(int /* color */);
         /**
          * Mendefinisikan posisi dari anggota titik terdefinisi. Titik akan
          * di konstruktsi oleh method.
@@ -88,6 +95,11 @@ class PolygonStack {
          * method ini.
          */
         void pop();
+        
+        // =====================================================================
+        // EXTENDS METHOD
+        // =====================================================================
+        void Draw(Canvas& /* canvas */);
         
         // =====================================================================
         // TRANSFORMATION METHODS

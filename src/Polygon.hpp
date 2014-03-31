@@ -24,6 +24,7 @@
 #define POLYGON_HPP
  
 #include "Point.hpp"
+#include "Drawable.hpp"
 #include <vector>
 
 typedef struct {
@@ -31,9 +32,10 @@ typedef struct {
     int b;
 } int_tuple;
 
-class Polygon {
+class Polygon: public Drawable {
     private:
         int n_titik;
+        int warna;
         std::vector<Point> listTitik;
         std::vector<int_tuple> listPasangan;
         
@@ -66,6 +68,11 @@ class Polygon {
         // METHODS
         // =====================================================================
         /**
+         * Set warna
+         * @param int Definisikan warna dalam bentuk bilangan bulat
+         */
+        void setColor(int /* color */);
+        /**
          * Mendefinisikan posisi dari anggota titik terdefinisi.
          * Jika indeks tidak terdefinisi maka pengesetan posisi tidak dilakukan
          * @param int Indeks titik yang akan didefinisikan
@@ -94,6 +101,11 @@ class Polygon {
          * @param int Indeks kedua
          */
         void lepas_hubung(int /* index 1*/, int /* index 2 */);
+        
+        // =====================================================================
+        // EXTENDS METHOD
+        // =====================================================================
+        void Draw(Canvas& /* canvas */);
         
         // =====================================================================
         // TRANSFORMATION METHODS

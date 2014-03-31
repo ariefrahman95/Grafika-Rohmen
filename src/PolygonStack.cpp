@@ -9,15 +9,18 @@
 
 PolygonStack::PolygonStack() {
     this->n_titik = 0;
+    this->warna = 0;
 }
 PolygonStack::~PolygonStack() {
     this->n_titik = 0;
+    this->warna = 0;
     this->listTitikLeft.clear();
     this->listTitikRight.clear();
 }
 PolygonStack::PolygonStack(const PolygonStack& pol) {
     int it;
     this->n_titik = pol.n_titik;
+    this->warna = pol.warna;
     
     this->listTitikLeft.clear();
     for(it = 0; it < this->n_titik; it++) {
@@ -33,6 +36,7 @@ PolygonStack::PolygonStack(const PolygonStack& pol) {
 PolygonStack& PolygonStack::operator=(const PolygonStack& pol) {
     int it;
     this->n_titik = pol.n_titik;
+    this->warna = pol.warna;
     
     this->listTitikLeft.clear();
     for(it = 0; it < this->n_titik; it++) {
@@ -51,6 +55,9 @@ PolygonStack& PolygonStack::operator=(const PolygonStack& pol) {
 // ===
 // METHODS
 // ===
+void PolygonStack::setColor(int color) {
+    this->warna = color;
+}
 void PolygonStack::push(double x_left, double y_left,
                   double x_right, double y_right) {
     if(x_left < 0 || y_left < 0 || x_right < 0 || y_right < 0)
@@ -79,6 +86,21 @@ void PolygonStack::pop(Point * p_1, Point * p_2) {
 }
 void PolygonStack::pop() {
     pop(NULL, NULL);
+}
+
+// ===
+// EXTENDS METHOD
+// ===
+void PolygonStack::Draw(Canvas& canvas) {
+    int i;
+    int size = this->n_titik;
+    
+    for(i = 0; i < size; i++) {
+        Line ll(Point(this->listTitikLeft.at(i)),
+            Point(this->listTitikRight.at(i)),
+            this->warna);
+        canvas.DrawLine(ll, this->warna);
+    }
 }
 
 // ===
