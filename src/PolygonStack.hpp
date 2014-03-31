@@ -21,12 +21,8 @@
 #define POLYGONSTACK_HPP
  
 #include "Point.hpp"
+#include <cstdlib>
 #include <vector>
-
-typedef struct {
-    int a;
-    int b;
-} int_tuple_stack;
 
 class PolygonStack {
     private:
@@ -53,7 +49,7 @@ class PolygonStack {
          */
         PolygonStack(const PolygonStack&);
         /**
-         * @param Polygon objek polygon yang akan di "shallow copy"
+         * @param Polygon objek polygon yang akan di "deep copy"
          */
         PolygonStack& operator=(const PolygonStack&);
         
@@ -88,7 +84,7 @@ class PolygonStack {
         
         /**
          * Mengambil kembali posisi titik akibat pop stack.
-         * Sama seperti pop(Point*, Point*) namun point akan didektruksi di dalam
+         * Sama seperti pop(Point*, Point*) namun point akan didekstruksi di dalam
          * method ini.
          */
         void pop();
@@ -99,21 +95,16 @@ class PolygonStack {
         /**
          * Salah satu bentuk transformasi yang melakukan pergesaran bidang polygon
          * @param int Tipe arah perpindahan: 0=>Up, 1=>Right, 2=>Down, 3=>Left
+         * @param double Besar translasi polygon
          */
-        void translate(int /* type */);
+        void translate(int /* type */, double /* magnitude */);
         
         /**
          * Salah satu bentuk transformasi yang melakukan perubahan ukuran dari polygon
-         * @param int Tipe pembesaran atau pengecilan: 0=>Memperkecil, 1=>Membesar
          * @param double Besar pembesaran yang akan dilakukan. Masukan: {x>0}
+         * Jika x < 1 maka akan memperkecil polygon, jika x > 1 maka memperbesar polygon
          */
-        void scale(int /* type */, double /* magnitude */);
-        
-        /**
-         * Salah satu bentuk transformasi yang melakukan pemutaran bidang
-         * @param double Besar pembesaran yang akan dilakukan. Masukan: {x>0}
-         */
-        void rotate(double /* magnitude */);
+        void scale(double /* magnitude */);
 };
 
-#endif /* POLYGON_HPP */
+#endif /* POLYGONSTACK_HPP */
