@@ -6,6 +6,9 @@
  *             dengan jumlah minimal 3 titik.
  *             Polygon ini tidak dapat menjamin bahwa dapat membentuk polygon
  *             tertutup. Harus dipastikan oleh pengguna kelas ini sendiri.
+ *             ASUMSI: Bukan skala cartesian, skala yang digunakan adalah
+ *                     skala layar. Titik harus positif dan 0,0 berada di
+ *                     kiri atas.
  *             
  */
 
@@ -13,6 +16,7 @@
  *
  * @author Setyo Legowo/13511071
  * @date 2014/03/30 21:00
+ * @lastedit 2014/03/31 12:03
  *
  */
 
@@ -54,7 +58,7 @@ class Polygon {
          */
         Polygon(const Polygon&);
         /**
-         * @param Polygon objek polygon yang akan di "shallow copy"
+         * @param Polygon objek polygon yang akan di "deep copy"
          */
         Polygon& operator=(const Polygon&);
         
@@ -84,27 +88,31 @@ class Polygon {
          */
         void hubung(int /* index 1*/, int /* index 2 */);
         
+        /**
+         * Menghapus pasangan index titik.
+         * @param int Indeks pertama
+         * @param int Indeks kedua
+         */
+        void lepas_hubung(int /* index 1*/, int /* index 2 */);
+        
         // =====================================================================
         // TRANSFORMATION METHODS
         // =====================================================================
         /**
          * Salah satu bentuk transformasi yang melakukan pergesaran bidang polygon
          * @param int Tipe arah perpindahan: 0=>Up, 1=>Right, 2=>Down, 3=>Left
+         * @param double besar pergeseran yang diberikan ke polygon
          */
-        void translate(int /* type */);
+        void translate(int /* type */, double /* magnitude */);
         
         /**
          * Salah satu bentuk transformasi yang melakukan perubahan ukuran dari polygon
-         * @param int Tipe pembesaran atau pengecilan: 0=>Memperkecil, 1=>Membesar
+         * ASUMSI: Titik akan selalu positif dan titik (0,0) berada di kiri atas
          * @param double Besar pembesaran yang akan dilakukan. Masukan: {x>0}
+         * Jika x < 1 maka akan memperkecil polygon, jika x > 1 maka akan
+         * memperbesar polygon. {x adalah magnitude}
          */
-        void scale(int /* type */, double /* magnitude */);
-        
-        /**
-         * Salah satu bentuk transformasi yang melakukan pemutaran bidang
-         * @param double Besar pembesaran yang akan dilakukan. Masukan: {x>0}
-         */
-        void rotate(double /* magnitude */);
+        void scale(double /* magnitude */);
 };
 
 #endif /* POLYGON_HPP */
