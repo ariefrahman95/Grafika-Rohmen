@@ -6,19 +6,21 @@
  * Left  Right  Bottom Top
  */
  
-#define h 320
-#define w 240
+#define hTop 160
+#define hBottom 480
+#define wLeft 120
+#define wRight 240
  
 // Returns the region code of a point
 int findRegion(int x, int y) {
 	int code = 0;
-	if(y >= h)
+	if(y <= hTop)
 	code |= 1; //top
-	else if( y < 0)
+	else if(y >= hBottom)
 	code |= 2; //bottom
-	if(x >= w)
+	if(x >= wRight)
 	code |= 4; //right
-	else if(x < 0)
+	else if(x <= wLeft)
 	code |= 8; //left
 	return(code);
 }
@@ -40,22 +42,22 @@ bool clipLine(int x1, int y1, int x2, int y2, int & x3, int & y3, int & x4, int 
 			codeout = code1 ? code1 : code2;
 			if(codeout & 1) //top 
 			{
-				x = x1 + (x2 - x1) * (h - y1) / (y2 - y1);
+				x = x1 + (x2 - x1) * (hTop - y1) / (y2 - y1);
 				y = h - 1;
 			}
 			else if(codeout & 2) //bottom 
 			{
-				x = x1 + (x2 - x1) * -y1 / (y2 - y1);
+				x = x1 + (x2 - x1) * (hBottom - y1) / (y2 - y1);
 				y = 0;
 			}
 			else if(codeout & 4) //right 
 			{
-				y = y1 + (y2 - y1) * (w - x1) / (x2 - x1);
+				y = y1 + (y2 - y1) * (wRight - x1) / (x2 - x1);
 				x = w - 1;
 			}
 			else //left 
 			{
-				y = y1 + (y2 - y1) * -x1 / (x2 - x1);
+				y = y1 + (y2 - y1) * (wLeft - x1) / (x2 - x1);
 				x = 0;
 			}
 			
