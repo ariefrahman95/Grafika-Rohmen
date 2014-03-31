@@ -10,6 +10,14 @@
 #define hBottom 480
 #define wLeft 120
 #define wRight 360
+
+typedef struct{
+	int offsetX;
+	int offsetY;
+	int width;
+	int height;
+	Point origin;
+} GWindow;
  
 // Returns the region code of a point
 int findRegion(int x, int y) {
@@ -85,4 +93,91 @@ bool clipLine(int x1, int y1, int x2, int y2, int & x3, int & y3, int & x4, int 
 		x3 = x4 = y3 = y4 = 0;
 		return 0;
 	}
+}
+
+void drawWindow(GWindow w){
+	int i;
+	for (i=0; i<w.width; i++){
+		putpixel(w.offsetX+i, w.offsetY, GREEN);
+		putpixel(w.offsetX+i, w.offsetY+w.height, GREEN);
+	}
+	for (i=0; i<w.height; i++){
+		putpixel(w.offsetX, w.offsetY+i, GREEN);
+		putpixel(w.offsetX+w.width, w.offsetY+i, GREEN);
+	}
+}
+
+void drawWindowOnWindow(GWindow w, GWindow g){
+	int i;
+	for (i=0; i<w.width; i++){
+		putpixel(g.origin.x+w.offsetX+i, g.origin.y-w.offsetY, GREEN);
+		putpixel(g.origin.x+w.offsetX+i, g.origin.y-w.offsetY+w.height, GREEN);
+	}
+	for (i=0; i<w.height; i++){
+		putpixel(g.origin.x+w.offsetX, g.origin.y-w.offsetY+i, GREEN);
+		putpixel(g.origin.x+w.offsetX+w.width, g.origin.y-w.offsetY+i, GREEN);
+	}
+}
+
+int main() {
+	int gd = DETECT, gm;
+    int i;
+    double t;
+    initgraph (&gd, &gm, "");
+	GWindow window = makeWindow(0,0,320,480);
+	GWindow viewport = makeWindow(320,0,320,480);
+	GWindow clipWindow = makeWindow(-40,60,80,120);
+	Point p1 = makePoint(-70,-70);
+	Point p2 = makePoint(0,70);
+	Line l = makeLine(p1, p2);
+	char command;
+	do{
+		system("cls");
+		cleardevice();
+		drawWindow(viewport);
+		drawWindow(window);
+		drawWindowOnWindow(clipWindow, window);
+		drawLineOnWindow(l, RED, window);
+		clipLine(l,clipWindow,viewport,window);
+		command = getch();
+		if(command == 'w'){
+			if (clipWindow.offsetY < (window.height/2))
+				clipWindow.offsetY += 5;
+		}
+		else if(command == 's'){
+			if (clipWindow.offsetY > clipWindow.height-(window.height/2))
+				clipWindow.offsetY -= 5;
+		}
+		else if(command == 'a'){
+			if (clipWindow.offsetX > -(window.width/2))
+				clipWindow.offsetX -= 5;
+		}
+		else if(command == 'd'){
+			if (clipWindow.offsetX < (window.width/2)-clipWindow.width)
+				clipWindow.offsetX += 5;
+		}
+		else if(command == '='){
+			if (clipWindow.width<=320){
+				clipWindow.width *= 2;
+				clipWindow.height *= 2;
+			}
+		}
+		else if(command == '-'){
+			if (clipWindow.width>=20){
+				clipWindow.width = clipWindow.width/2;
+				clipWindow.height = clipWindow.height/2;
+			}
+			if (clipWindow.offsetX <= -(window.height/2))
+				clipWindow.offsetX = -(window.height/2);
+		}
+		if (clipWindow.offsetY >= window.height/2)
+				clipWindow.offsetY = window.height/2;
+		if (clipWindow.offsetY <= clipWindow.height-(window.height/2))
+				clipWindow.offsetY = clipWindow.height-(window.height/2);
+		if (clipWindow.offsetX <= -(window.height/2))
+				clipWindow.offsetX = -(window.height/2);
+		if (clipWindow.offsetX >= (window.width/2)-clipWindow.width)
+				clipWindow.offsetX = (window.width/2)-clipWindow.width;
+	} while (command != 'x');
+	return 0;
 }

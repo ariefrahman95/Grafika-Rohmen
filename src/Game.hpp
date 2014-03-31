@@ -4,6 +4,7 @@
 #include "Canvas.hpp"
 #include "TimeBar.hpp"
 #include "Pemandangan.hpp"
+#include "Barrier.hpp"
 
 #define BKEY_LEFT 37
 #define BKEY_RIGHT 39
@@ -41,6 +42,9 @@ class Game {
 		
 		TimeBar timeBar;
         Pemandangan pemandangan;
+		Barrier b1;
+		// Barrier b2;
+		// Barrier b3;
 };
 
 #endif

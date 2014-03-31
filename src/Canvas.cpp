@@ -1,4 +1,5 @@
 #include "Canvas.hpp"
+#include <iostream>
 #include <deque>
 
 Canvas::Canvas() {
@@ -22,6 +23,7 @@ void Canvas::BeginDraw() {
 void Canvas::EndDraw() {
 	drawing = false;
 	setvisualpage( InactivePage() );
+	
 	page = InactivePage();
 }
 
