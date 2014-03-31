@@ -8,8 +8,8 @@
 #include "Polygon.hpp"
 #include "Line.hpp"
 
-Polygon::Polygon(int jumlah_titik) {
-    this->n_titik = 0;
+Polygon2::Polygon2(int jumlah_titik) {
+    this->n_titik = jumlah_titik;
     this->warna = 0;
     if(jumlah_titik < 3)
         return;
@@ -21,13 +21,13 @@ Polygon::Polygon(int jumlah_titik) {
         this->listTitik.push_back(Point());
     }
 }
-Polygon::~Polygon() {
+Polygon2::~Polygon2() {
     this->n_titik = 0;
     this->warna = 0;
     this->listTitik.clear();
     this->listPasangan.clear();
 }
-Polygon::Polygon(const Polygon& Pol) {
+Polygon2::Polygon2(const Polygon2& Pol) {
     int it;
     this->n_titik = Pol.n_titik;
     this->warna = Pol.warna;
@@ -45,7 +45,7 @@ Polygon::Polygon(const Polygon& Pol) {
         this->listPasangan.push_back(itpl);
     }
 }
-Polygon& Polygon::operator=(const Polygon& Pol) {
+Polygon2& Polygon2::operator=(const Polygon2& Pol) {
     int it;
     this->n_titik = Pol.n_titik;
     this->warna = Pol.warna;
@@ -69,10 +69,10 @@ Polygon& Polygon::operator=(const Polygon& Pol) {
 // ===
 // METHODS
 // ===
-void Polygon::setColor(int color) {
+void Polygon2::setColor(int color) {
     this->warna = color;
 }
-void Polygon::define(int index, double x, double y) {
+void Polygon2::define(int index, double x, double y) {
     if(index >= this->n_titik || index < 0 || x < 0.0 || y < 0.0)
         return;
     
@@ -81,10 +81,10 @@ void Polygon::define(int index, double x, double y) {
     p.y = y;
     this->listTitik.at(index) = p;
 }
-void Polygon::define(int index, const Point& point) {
+void Polygon2::define(int index, const Point& point) {
     define(index, point.x, point.y);
 }
-void Polygon::hubung(int index1, int index2) {
+void Polygon2::hubung(int index1, int index2) {
     if(index1 >= this->n_titik || index1 < 0
         || index2 >= this->n_titik || index2 < 0)
         return;
@@ -105,7 +105,7 @@ void Polygon::hubung(int index1, int index2) {
         this->listPasangan.push_back(itpl);
     }
 }
-void Polygon::lepas_hubung(int index1, int index2) {
+void Polygon2::lepas_hubung(int index1, int index2) {
     if(index1 >= this->n_titik || index1 < 0
         || index2 >= this->n_titik || index2 < 0)
         return;
@@ -128,7 +128,7 @@ void Polygon::lepas_hubung(int index1, int index2) {
 // ===
 // EXTENDS METHODS
 // ===
-void Polygon::Draw(Canvas& canvas) {
+void Polygon2::Draw(Canvas& canvas) {
     int i;
     int_tuple _itpl;
     int size = this->listPasangan.size();
@@ -145,7 +145,7 @@ void Polygon::Draw(Canvas& canvas) {
 // ===
 // TRANSFORMATION
 // ===
-void Polygon::translate(int type, double magnitude) {
+void Polygon2::translate(int type, double magnitude) {
     if(type > 3 || type < 0 || magnitude < 0.0)
         return;
     
@@ -175,7 +175,7 @@ void Polygon::translate(int type, double magnitude) {
             break;
     }
 }
-void Polygon::scale(double magnitude) {
+void Polygon2::scale(double magnitude) {
     if(magnitude < 0.0)
         return;
     

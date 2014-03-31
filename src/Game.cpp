@@ -13,14 +13,14 @@ Game::~Game() {
 }
 
 void Game::HandleInput() {
-	if (keypressed(KEY_LEFT)) {
+	if (keypressed(BKEY_LEFT)) {
 		if (!isPlaying && !timeBar.IsTimeUp()) {
 			isPlaying = true;
 		}
 		timeBar.Move(-1);
 	}
 
-	if (keypressed(KEY_RIGHT)) {
+	if (keypressed(BKEY_RIGHT)) {
 		if (!isPlaying && !timeBar.IsTimeUp()) {
 			isPlaying = true;
 		}
@@ -49,6 +49,7 @@ void Game::Draw() {
 	// begin drawing
 	canvas.BeginDraw();
 	
+    pemandangan.Draw(canvas);
 	timeBar.Draw(canvas);
 	
 	/*// drawing testing by Tito

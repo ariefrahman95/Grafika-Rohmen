@@ -297,7 +297,7 @@ void Canvas::Fill(Point P, int oldColor, int newColor) {
 	while (!Q.empty()) {
 		Point currP = Q.front();
 		Q.pop_front();
-		if (getpixel(currP.x, currP.y) == oldColor) {
+		if ((int) getpixel(currP.x, currP.y) == oldColor) {
 			putpixel(currP.x, currP.y, newColor);
 			Q.push_back(Point(currP.x + 1, currP.y    ));
 			Q.push_back(Point(currP.x - 1, currP.y    ));
