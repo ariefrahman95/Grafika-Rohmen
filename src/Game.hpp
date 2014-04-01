@@ -44,10 +44,8 @@ class Game {
 		
 		TimeBar timeBar;
         Pemandangan pemandangan;
-		Barrier b1;
+		Barrier wheel, wood, stone;
 		Car car;
-		// Barrier b2;
-		// Barrier b3;
 };
 
 #endif
