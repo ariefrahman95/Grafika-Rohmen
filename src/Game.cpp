@@ -4,7 +4,7 @@
 #include <Windows.h>
 using namespace std;
 
-Game::Game() : b1(WHEEL) {
+Game::Game() : wood(WOOD) {
 	isPlaying = false;
 	exit = false;
     isInitialBg = false;
@@ -34,7 +34,7 @@ void Game::HandleInput() {
 void Game::Update() {
 	if (isPlaying) {
 		timeBar.Update();
-		b1.Update();
+		wood.Update();
         pemandangan.Update();
 		if (timeBar.IsTimeUp()) {
 			isPlaying = false;
@@ -55,9 +55,10 @@ void Game::Draw() {
 	canvas.BeginDraw();
 	
     pemandangan.Draw(canvas);
-	b1.Draw(canvas);
-	timeBar.Draw(canvas);
+	wood.Draw(canvas);
 	car.Draw(canvas);
+	
+	timeBar.Draw(canvas);
 	
 	/*// drawing testing by Tito
 	for ( int i = 0; i < getmaxx(); i++ ) {
