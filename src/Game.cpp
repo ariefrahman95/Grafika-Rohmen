@@ -6,6 +6,7 @@ using namespace std;
 
 Game::Game() : wood(WOOD) {
 	isPlaying = false;
+    isStart = true;
 	exit = false;
     isInitialBg = false;
 }
@@ -38,6 +39,7 @@ void Game::Update() {
         pemandangan.Update();
 		if (timeBar.IsTimeUp()) {
 			isPlaying = false;
+            isStart = false;
 		}
 	}
 }
@@ -54,11 +56,18 @@ void Game::Draw() {
 	// begin drawing
 	canvas.BeginDraw();
 	
-    pemandangan.Draw(canvas);
-	wood.Draw(canvas);
-	car.Draw(canvas);
-	
-	timeBar.Draw(canvas);
+    if(isPlaying || isStart) {
+        pemandangan.Draw(canvas);
+        wood.Draw(canvas);
+        car.Draw(canvas);
+        
+        timeBar.Draw(canvas);
+    } else {
+        notif.drawYou();
+        notif.Draw(canvas);
+        notif.drawWin();
+        notif.Draw(canvas);
+    }
 	
 	/*// drawing testing by Tito
 	for ( int i = 0; i < getmaxx(); i++ ) {

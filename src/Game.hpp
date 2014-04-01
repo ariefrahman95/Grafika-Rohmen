@@ -4,6 +4,7 @@
 #include "Canvas.hpp"
 #include "TimeBar.hpp"
 #include "Pemandangan.hpp"
+#include "Notification.hpp"
 #include "Barrier.hpp"
 #include "Car.hpp"
 
@@ -39,12 +40,14 @@ class Game {
 		Canvas canvas;
 		
 		bool exit;
+        bool isStart;
 		bool isPlaying;
         bool isInitialBg;
 		
 		TimeBar timeBar;
         Pemandangan pemandangan;
 		Barrier wheel, wood, stone;
+        Notification notif;
 		Car car;
 };
 
