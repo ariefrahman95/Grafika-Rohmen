@@ -37,11 +37,14 @@ void Game::Update() {
 		timeBar.Update();
 		wood.Update();
         pemandangan.Update();
+		
 		int X = car.carS.at(3).getT(3).x - wood.wood[0].P0.x;
 		if (timeBar.IsTimeUp() || (wood.wood[0].P0.y > 342 && ABS(X) < 128)) {
 			isPlaying = false;
 			isGameOver = true;
 		}
+	} else if (!isPlaying && (isGameOver || timeBar.IsTimeUp())) {
+		notif.Update();
 	}
 }
 
@@ -64,7 +67,7 @@ void Game::Draw() {
 	timeBar.Draw(canvas);
 	
 	if (timeBar.IsTimeUp() || isGameOver) {
-		canvas.DrawLine(Line(Point(0,0), Point(640,480), BLACK), BLACK);
+		notif.Draw(canvas);
 	}
 	
 	/*// drawing testing by Tito

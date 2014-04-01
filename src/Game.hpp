@@ -6,6 +6,7 @@
 #include "Pemandangan.hpp"
 #include "Barrier.hpp"
 #include "Car.hpp"
+#include "Notification.hpp"
 
 #define BKEY_LEFT 37
 #define BKEY_RIGHT 39
@@ -47,6 +48,8 @@ class Game {
         Pemandangan pemandangan;
 		Barrier wheel, wood, stone;
 		Car car;
+		
+		Notification notif;
 };
 
 #endif
