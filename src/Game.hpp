@@ -40,6 +40,7 @@ class Game {
 		
 		bool exit;
 		bool isPlaying;
+		bool isGameOver;
         bool isInitialBg;
 		
 		TimeBar timeBar;

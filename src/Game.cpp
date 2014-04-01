@@ -6,6 +6,7 @@ using namespace std;
 
 Game::Game() : wood(WOOD) {
 	isPlaying = false;
+	isGameOver = false;
 	exit = false;
     isInitialBg = false;
 }
@@ -15,7 +16,7 @@ Game::~Game() {
 
 void Game::HandleInput() {
 	if (keypressed(BKEY_LEFT)) {
-		if (!isPlaying && !timeBar.IsTimeUp()) {
+		if (!isPlaying && !timeBar.IsTimeUp() && !isGameOver) {
 			isPlaying = true;
 		}
 		timeBar.Move(-1);
@@ -23,7 +24,7 @@ void Game::HandleInput() {
 	}
 
 	if (keypressed(BKEY_RIGHT)) {
-		if (!isPlaying && !timeBar.IsTimeUp()) {
+		if (!isPlaying && !timeBar.IsTimeUp() && !isGameOver) {
 			isPlaying = true;
 		}
 		timeBar.Move(1);
@@ -36,8 +37,10 @@ void Game::Update() {
 		timeBar.Update();
 		wood.Update();
         pemandangan.Update();
-		if (timeBar.IsTimeUp()) {
+		int X = car.carS.at(3).getT(3).x - wood.wood[0].P0.x;
+		if (timeBar.IsTimeUp() || (wood.wood[0].P0.y > 342 && ABS(X) < 128)) {
 			isPlaying = false;
+			isGameOver = true;
 		}
 	}
 }
@@ -55,10 +58,14 @@ void Game::Draw() {
 	canvas.BeginDraw();
 	
     pemandangan.Draw(canvas);
-	wood.Draw(canvas);
 	car.Draw(canvas);
+	wood.Draw(canvas);
 	
 	timeBar.Draw(canvas);
+	
+	if (timeBar.IsTimeUp() || isGameOver) {
+		canvas.DrawLine(Line(Point(0,0), Point(640,480), BLACK), BLACK);
+	}
 	
 	/*// drawing testing by Tito
 	for ( int i = 0; i < getmaxx(); i++ ) {
