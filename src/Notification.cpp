@@ -1,39 +1,31 @@
 #include "Notification.hpp"
 
 Notification::Notification() {
-	lines.push_back(Line(Point(100,100), Point(100, 400), BLACK));
-	lines.push_back(Line(Point(100,400), Point(600, 400), BLACK));
-	lines.push_back(Line(Point(600,400), Point(600, 100), BLACK));
-	lines.push_back(Line(Point(600,100), Point(100, 100), BLACK));
+	lines.push_back(Line(Point(315,218), Point(315,222), BLACK));
+	lines.push_back(Line(Point(315,222), Point(325,222), BLACK));
+	lines.push_back(Line(Point(325,222), Point(325,218), BLACK));
+	lines.push_back(Line(Point(325,218), Point(315,218), BLACK));
 	
-	isLarger = false;
-	counter = 29;
+	max = 512;
+	//counter = 2;
 }
 
 Notification::~Notification() {}
 
 void Notification::Update() {
-	if (counter % 2 == 0) {
-		for (int i = 0; i < lines.size(); i++) {
-			if (isLarger) {
+	//if (counter == 0) {
+		if (lines[3].P0.x - lines[3].P1.x < max) {
+			for (int i = 0; i < lines.size(); i++) {
 				lines[i].Scale(2, Point(320,220));
-				if (lines[0].P0.x < 200) {
-					isLarger = false;
-				}
-			} else {
-				lines[i].Scale(0.5, Point(320,220));
-				if (lines[0].P0.x > 300) {
-					isLarger = true;
-				}
 			}
 		}
-	}
+	//}
 	
-	if (counter == 0) {
-		counter = 2;
-	}
+	//if (counter == 0) {
+	//	counter = 2;
+	//}
 	
-	counter--;
+	//counter--;
 }
 
 void Notification::Draw(Canvas& canvas) {

@@ -323,10 +323,14 @@ void Canvas::FillFlood(Point P, int oldColor, int newColor) {
 		Q.pop_front();
 		if ((int) getpixel(currP.x, currP.y) == oldColor) {
 			putpixel(currP.x, currP.y, newColor);
-			Q.push_back(Point(currP.x + 1, currP.y    ));
-			Q.push_back(Point(currP.x - 1, currP.y    ));
-			Q.push_back(Point(currP.x    , currP.y + 1));
-			Q.push_back(Point(currP.x    , currP.y - 1));
+			if (currP.x + 1 < 640)
+				Q.push_back(Point(currP.x + 1, currP.y    ));
+			if (currP.x - 1 > 0)
+				Q.push_back(Point(currP.x - 1, currP.y    ));
+			if (currP.y + 1 < 480)
+				Q.push_back(Point(currP.x    , currP.y + 1));
+			if (currP.x - 1 > 0)
+				Q.push_back(Point(currP.x    , currP.y - 1));
 		}
 	}
 }

@@ -10,9 +10,9 @@ enum barrierType {WHEEL, WOOD, STONE};
 
 class Barrier {
 	public:
-		Circle wheel;
+		std::vector<Circle> wheel;
 		std::vector<Line> wood;
-		Circle stone;
+		std::vector<Line> stone;
 		
 		Point position;
 		int lane;
@@ -22,8 +22,13 @@ class Barrier {
 		
 		Barrier();
 		Barrier(int type);
+		
 		void Draw(Canvas&);
 		void Update();
+		
+		bool IsWheelFront();
+		bool IsWoodFront();
+		bool IsStoneFront();
 };
 
 #endif

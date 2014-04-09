@@ -4,7 +4,7 @@
 #include <Windows.h>
 using namespace std;
 
-Game::Game() : wood(WOOD) {
+Game::Game() : wheel(WHEEL), wood(WOOD), stone(STONE) {
 	isPlaying = false;
 	isGameOver = false;
 	exit = false;
@@ -35,11 +35,27 @@ void Game::HandleInput() {
 void Game::Update() {
 	if (isPlaying) {
 		timeBar.Update();
-		wood.Update();
-        pemandangan.Update();
 		
-		int X = car.carS.at(3).getT(3).x - wood.wood[0].P0.x;
-		if (timeBar.IsTimeUp() || (wood.wood[0].P0.y > 342 && ABS(X) < 128)) {
+		wheel.Update();
+		wood.Update();
+		stone.Update();
+        
+		pemandangan.Update();
+		
+		int X1 = (car.carS.at(3).getT(0).x + car.carS.at(3).getT(3).x)/2 - wheel.wheel[0].C.x;
+		int X2 = (car.carS.at(3).getT(0).x + car.carS.at(3).getT(3).x)/2 - (wood.wood[0].P0.x + wood.wood[3].P0.x)/2;
+		int X3 = (car.carS.at(3).getT(0).x + car.carS.at(3).getT(3).x)/2 - (stone.stone[1].P0.x + stone.stone[2].P0.x)/2;
+		if (
+			timeBar.IsTimeUp() 
+			|| 
+			(
+				(wheel.wheel[0].C.y > 342 && ABS(X1) < 100 && wheel.IsWheelFront()) 
+				|| 
+				(wood.wood[0].P0.y > 342 && ABS(X2) < 100 && wood.IsWoodFront()) 
+				|| 
+				(stone.stone[0].P0.y > 342 && ABS(X3) < 100 && stone.IsStoneFront())
+			)
+		) {
 			isPlaying = false;
 			isGameOver = true;
 		}
@@ -61,8 +77,18 @@ void Game::Draw() {
 	canvas.BeginDraw();
 	
     pemandangan.Draw(canvas);
-	car.Draw(canvas);
-	wood.Draw(canvas);
+	
+	if (!wheel.IsWheelFront() || !wood.IsWoodFront() || !stone.IsStoneFront()) {
+		car.Draw(canvas);
+		wheel.Draw(canvas);
+		wood.Draw(canvas);
+		stone.Draw(canvas);
+	} else {
+		wheel.Draw(canvas);
+		wood.Draw(canvas);
+		stone.Draw(canvas);
+		car.Draw(canvas);
+	}
 	
 	timeBar.Draw(canvas);
 	

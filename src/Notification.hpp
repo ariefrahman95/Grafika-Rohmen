@@ -18,7 +18,8 @@ class Notification: public Drawable {
 		
 		std::vector<Line> lines;
 		
-		bool isLarger;
-		int counter;
+		int max;
+		//int counter;
 };
+
 #endif
