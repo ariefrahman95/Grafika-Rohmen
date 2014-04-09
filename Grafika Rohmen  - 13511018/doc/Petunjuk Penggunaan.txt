@@ -1,5 +1,0 @@
-(1) Jalankan rohmen.exe di dalam folder /bin
-(2) Untuk memulai permainan, tekan tombol KIRI atau KANAN
-(3) Untuk menggerakkan mobil, tekan tombol KIRI atau KANAN
-
-~ Selamat Bermain ~
